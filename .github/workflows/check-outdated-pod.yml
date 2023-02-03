@@ -37,10 +37,9 @@ jobs:
         with:
           filename: .github/outdated-pod-template.md
           update_existing: true
-      - name: Log info's
+      - name: Log outdated pod and issue info
         if: steps.outdated.outputs.has_any_outdated != 'false'
         run: |
-          echo "${{ steps.create-issue.outputs }}"
           echo "${{ steps.outdated.outputs.outdated_pod_info }}"
           echo Created issue number ${{ steps.create-issue.outputs.number }}
           echo Created ${{ steps.create-issue.outputs.url }}
