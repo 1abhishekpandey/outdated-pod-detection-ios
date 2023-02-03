@@ -40,7 +40,7 @@ jobs:
       - name: Log info's
         if: steps.outdated.outputs.has_any_outdated != 'false'
         run: |
-          echo "${{ steps.create-issue.outputs. }}"
+          echo "${{ steps.create-issue.outputs }}"
           echo "${{ steps.outdated.outputs.outdated_pod_info }}"
           echo Created issue number ${{ steps.create-issue.outputs.number }}
           echo Created ${{ steps.create-issue.outputs.url }}
