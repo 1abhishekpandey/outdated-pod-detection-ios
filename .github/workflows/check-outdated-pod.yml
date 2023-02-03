@@ -42,7 +42,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DESCRIPTION: ${{ steps.outdated.outputs.outdated_pod_info }}
-          OUTDATED_SDK_NAME: Amplitude
+          # OUTDATED_SDK_NAME: Amplitude
         with:
           filename: .github/some-other-template.md
           update_existing: true
