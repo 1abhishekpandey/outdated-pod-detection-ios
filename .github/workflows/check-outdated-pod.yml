@@ -34,6 +34,7 @@ jobs:
       - name: Create an issue for updating outdated pod
         if: steps.outdated.outputs.has_any_outdated != 'false'
         uses: JasonEtco/create-an-issue@v2
+        id: create-issue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DESCRIPTION: ${{ steps.outdated.outputs.outdated_pod_info }}
@@ -41,6 +42,6 @@ jobs:
         with:
           filename: .github/outdated-pod-template.md
           update_existing: true
-          id: create-issue
+          
       - run: 'echo Created issue number ${{ steps.create-issue.outputs.number }}'
       - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
