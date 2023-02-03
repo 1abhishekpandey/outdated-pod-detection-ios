@@ -1,7 +1,7 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: "BUG : title"
-labels: bug, open source
-assignees: 1abhishekpandey
+title: Someone just pushed
+assignees: JasonEtco, matchai
+labels: bug, enhancement
 ---
+
+Someone just pushed, oh no! Here's who did it: {{ payload.sender.login }}.
