@@ -33,7 +33,7 @@ jobs:
       #       # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   outdatedPods2:
     runs-on: macos-latest
-    if: steps.outdated.outputs.has_any_outdated != 'false' # This will only run if there is an outdated pod
+    if: outdatedPods.steps.outdated.outputs.has_any_outdated != 'false' # This will only run if there is an outdated pod
     steps:
       - run: |
           echo "Successfull"
