@@ -1,5 +1,5 @@
 ---
-title: Someone just pushed
+title: "fix: update Amplitude SDK to the version {{env.ADJECTIVE}}"
 assignees: 1abhishekpandey
 labels: updateSDK
 ---
