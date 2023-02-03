@@ -30,12 +30,11 @@ jobs:
           project_directory: Example
           podspec: Rudder-Amplitude.podspec
           exclude_pods: Rudder
-          run: echo "${{ steps.outdated.outputs.outdated_pod_info }}"
-      # - name: Create an issue if outdated pods are detected
-      #   if: steps.outdated.outputs.has_any_outdated != 'false' # This will only run if there is an outdated pod
-      #   run: |
-      #     echo "Successfull"
-      #     echo "${{ steps.outdated.outputs.outdated_pod_info }}"
+      - name: Print outdated pods
+        if: steps.outdated.outputs.has_any_outdated != 'false'
+        run: |
+          echo "Successfull"
+          echo "${{ steps.outdated.outputs.outdated_pod_info }}"
       - name: Create an issue if outdated pods are detected 
         if: steps.outdated.outputs.has_any_outdated != 'false'
         uses: JasonEtco/create-an-issue@v2
