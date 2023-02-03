@@ -1,19 +1,9 @@
 name: Check Outdated Pod Copy
 
-# on: push
-# on:
-#   pull_request:
-#     branches: ["master"]
-#     types: ["opened", "reopened", "edited", "synchronize"]
 on:
   schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0-59 * * * 5'
+    - cron:  '0 5-7 * * *'
   workflow_dispatch:
-# on: 
-#   schedule:
-#     # * is a special character in YAML so you have to quote this string
-#     - cron:  '2 0-23 * * *'
 
 jobs:
   outdatedPods:
