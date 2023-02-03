@@ -32,7 +32,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          filename: .github/pull_request_template.md #some-other-template.md
+          filename: .github/some-other-template.md
       # - uses: JasonEtco/create-an-issue@v2
       #     # env:
       #       # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
