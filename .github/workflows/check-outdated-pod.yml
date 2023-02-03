@@ -56,6 +56,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           filename: .github/some-other-template.md
+          update_existing: true
 
 
 
