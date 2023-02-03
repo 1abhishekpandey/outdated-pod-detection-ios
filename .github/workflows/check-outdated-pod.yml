@@ -19,26 +19,19 @@ jobs:
           pod install
       - name: Check outdated pod
         uses: yatatsu/pod-outdated-check-action@v0.3.0
-        id: outdated
+        id: check-outdated-pods
         with:
           project_directory: Example
           podspec: Rudder-Amplitude.podspec
           exclude_pods: Rudder
       - name: Create an issue for updating outdated pod
-        if: steps.outdated.outputs.has_any_outdated != 'false'
+        if: steps.check-outdated-pods.outputs.has_any_outdated != 'false'
         uses: JasonEtco/create-an-issue@v2
         id: create-issue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DESCRIPTION: ${{ steps.outdated.outputs.outdated_pod_info }}
+          DESCRIPTION: ${{ steps.check-outdated-pods.outputs.outdated_pod_info }}
           OUTDATED_SDK_NAME: Amplitude
         with:
           filename: .github/outdated-pod-template.md
           update_existing: true
-      - name: Log outdated pod and issue info
-        if: steps.outdated.outputs.has_any_outdated != 'false'
-        run: |
-          echo "$steps.create-issue.outputs"
-          echo "${{ steps.outdated.outputs.outdated_pod_info }}"
-          echo Created issue number ${{ steps.create-issue.outputs.number }}
-          echo Created ${{ steps.create-issue.outputs.url }}
