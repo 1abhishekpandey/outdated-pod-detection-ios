@@ -1,5 +1,7 @@
 ---
-title: Weekly Radar {{ date | date('dddd, MMMM Do') }}
+name: Bug report
+about: Create a report to help us improve
+title: "BUG : <Title>"
+labels: bug, open source
 assignees: 1abhishekpandey
-labels: bug, enhancement
 ---
