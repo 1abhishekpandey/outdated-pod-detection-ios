@@ -34,11 +34,11 @@ jobs:
           echo "Successfull"
           echo "${{ steps.outdated.outputs.outdated_pod_info }}"
 
-      - name: Create an issue
-        uses: actions-ecosystem/action-create-issue@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          title: Apple #'${{ steps.date.outputs.today }}'
+      # - name: Create an issue
+      #   uses: actions-ecosystem/action-create-issue@v1
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     title: Apple #'${{ steps.date.outputs.today }}'
           # body: |
           #   ## This week's TODO
 
@@ -51,11 +51,11 @@ jobs:
 
 
 
-      # - uses: JasonEtco/create-an-issue@v2
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     filename: .github/some-other-template.md
+      - uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: .github/some-other-template.md
 
 
 
