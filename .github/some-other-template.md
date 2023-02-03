@@ -1,4 +1,5 @@
 ---
 title: Weekly Radar {{ date | date('dddd, MMMM Do') }}
-labels: bug
+assignees: 1abhishekpandey
+labels: bug, enhancement
 ---
