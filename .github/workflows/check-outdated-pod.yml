@@ -28,11 +28,32 @@ jobs:
         run: |
           echo "Successfull"
           echo "${{ steps.outdated.outputs.outdated_pod_info }}"
-      - uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create an issue
+        uses: actions-ecosystem/action-create-issue@v1
         with:
-          filename: .github/some-other-template.md
+          github_token: ${{ secrets.github_token }}
+          title: ${{ steps.date.outputs.today }}
+          body: |
+            ## This week's TODO
+
+            - [ ] Have a meeting with UX team
+            - [ ] Check the dashboard
+
+          labels: |
+            meeting
+            weekly
+
+
+
+      # - uses: JasonEtco/create-an-issue@v2
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     filename: .github/some-other-template.md
+
+
+
       # - uses: JasonEtco/create-an-issue@v2
       #     # env:
       #       # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
