@@ -5,10 +5,14 @@ name: Check Outdated Pod Copy
 #   pull_request:
 #     branches: ["master"]
 #     types: ["opened", "reopened", "edited", "synchronize"]
-on: 
+on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '2 0-23 * * *'
+    - cron:  '0-59 0-23 * * *'
+# on: 
+#   schedule:
+#     # * is a special character in YAML so you have to quote this string
+#     - cron:  '2 0-23 * * *'
 
 jobs:
   outdatedPods:
