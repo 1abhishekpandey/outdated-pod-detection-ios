@@ -34,15 +34,15 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           title: Apple #'${{ steps.date.outputs.today }}'
-          body: |
-            ## This week's TODO
+          # body: |
+          #   ## This week's TODO
 
-            - [ ] Have a meeting with UX team
-            - [ ] Check the dashboard
+          #   - [ ] Have a meeting with UX team
+          #   - [ ] Check the dashboard
 
-          labels: |
-            meeting
-            weekly
+          # labels: |
+          #   meeting
+          #   weekly
 
 
 
