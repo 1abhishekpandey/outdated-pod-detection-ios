@@ -28,6 +28,11 @@ jobs:
         run: |
           echo "Successfull"
           echo "${{ steps.outdated.outputs.outdated_pod_info }}"
+      - uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: .github/some-other-template.md
       # - uses: JasonEtco/create-an-issue@v2
       #     # env:
       #       # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
