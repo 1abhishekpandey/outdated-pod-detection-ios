@@ -1,7 +1,7 @@
 ---
-title: "fix: update Amplitude SDK to the latest version"
+title: "fix: update {{ env.OUTDATED_SDK_NAME }} SDK to the latest version"
 assignees: 1abhishekpandey
 labels: updateSDK
 ---
 
-{{env.ADJECTIVE}}
+{{ env.DESCRIPTION }}
