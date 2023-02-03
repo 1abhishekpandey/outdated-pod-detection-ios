@@ -2,7 +2,7 @@ name: Check Outdated Pod
 
 on: 
   schedule:
-  - cron: '0-59 * * * 5'
+  - cron: '0-59 * * * *'
   workflow_dispatch:
 
 jobs:
