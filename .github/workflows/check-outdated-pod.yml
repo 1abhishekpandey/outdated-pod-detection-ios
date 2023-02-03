@@ -37,7 +37,7 @@ jobs:
       - name: Create an issue
         uses: actions-ecosystem/action-create-issue@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: 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
           title: Apple #'${{ steps.date.outputs.today }}'
           # body: |
           #   ## This week's TODO
