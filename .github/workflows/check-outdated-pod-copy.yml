@@ -7,10 +7,10 @@ on:
 
 jobs:
   outdatedPods:
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-      issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
+    # permissions:
+    #   contents: 'read'
+    #   id-token: 'write'
+    #   issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -33,7 +33,6 @@ jobs:
           echo "Successfull"
           echo "${{ steps.outdated.outputs.outdated_pod_info }}"
 
-
       # - name: Create an issue if outdated pods are detected 
       #   if: steps.outdated.outputs.has_any_outdated != 'false'
       #   uses: JasonEtco/create-an-issue@v2
@@ -44,13 +43,6 @@ jobs:
       #   with:
       #     filename: .github/outdated-pod-template.md
       #     update_existing: true
-
-      # - name: Github if issue already exists or not in OPEN state
-        
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     gh issue create -a "1abhishekpandey" -b "${{ steps.outdated.outputs.outdated_pod_info }}" -t "fix: update Amplitude SDK to the latest version"
 
       - name: Check if issue exist or not
         if: steps.outdated.outputs.has_any_outdated != 'false'
