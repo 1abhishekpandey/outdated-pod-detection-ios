@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
           
-          echo "LABELS=outdatedPods" >> $GITHUB_ENV
+          echo "LABELS=outdatedPod" >> $GITHUB_ENV
           echo "BODY=Amplitude: new version available 7.2.2 -> 7.2.2 (latest version 8.14.0)" >> $GITHUB_ENV
         # echo "BODY=${{steps.outdated.outputs.outdated_pod_info}}" >> $GITHUB_ENV
       - name: Print outdated pods info
@@ -66,7 +66,7 @@ jobs:
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label outdatedPods
+          gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
       - name: Edit existing issue
         if: env.number != ''
         env:
