@@ -53,8 +53,9 @@ jobs:
       #     gh issue create -a "1abhishekpandey" -b "${{ steps.outdated.outputs.outdated_pod_info }}" -t "fix: update Amplitude SDK to the latest version"
 
       - name: Check issue
+        id: version
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          abc=gh issue list | grep 'fix: update Amplitude SDK to the latest version'
-          exho $abc
+          echo "abc=$(gh issue list | grep 'fix: update Amplitude SDK to the latest version')""
+          
