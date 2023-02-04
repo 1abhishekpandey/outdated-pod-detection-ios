@@ -26,20 +26,20 @@ jobs:
           project_directory: Example
           podspec: Rudder-Amplitude.podspec
           exclude_pods: Rudder
-      - name: Set title, body and label
+      - name: Set title, body, label and assignee
         run: |
           echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
           echo "BODY=${{steps.outdated.outputs.outdated_pod_info}}" >> $GITHUB_ENV
           echo "LABELS=outdatedPod" >> $GITHUB_ENV
           echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
-      - name: Print info
-        if: steps.outdated.outputs.has_any_outdated != 'false'
-        run: |
-          echo "Successfull"
-          echo "${{ env.TITLE }}"
-          echo "${{ env.BODY }}"
-          echo "${{ env.LABELS }}"
-          echo "${{ env.ASSIGNEE }}"
+      # - name: Print info
+      #   if: steps.outdated.outputs.has_any_outdated != 'false'
+      #   run: |
+      #     echo "Successfull"
+      #     echo "${{ env.TITLE }}"
+      #     echo "${{ env.BODY }}"
+      #     echo "${{ env.LABELS }}"
+      #     echo "${{ env.ASSIGNEE }}"
 
       # # - name: Create an issue if outdated pods are detected 
       # #   if: steps.outdated.outputs.has_any_outdated != 'false'
@@ -57,17 +57,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          echo "number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
+          echo "issue_number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
       - name: Create new issue
-        if: steps.outdated.outputs.has_any_outdated != 'false' && env.number == ''
+        if: steps.outdated.outputs.has_any_outdated != 'false' && env.issue_number == ''
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
           gh label create --force outdatedPod --description "Pod is outdated" --color FBCA04
           gh issue create -a "${{ env.ASSIGNEE }}" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
       - name: Edit existing issue
-        if: steps.outdated.outputs.has_any_outdated != 'false' && env.number != ''
+        if: steps.outdated.outputs.has_any_outdated != 'false' && env.issue_number != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue edit ${{ env.number }} --body "${{ env.BODY }}"
+          gh issue edit ${{ env.issue_number }} --body "${{ env.BODY }}"
