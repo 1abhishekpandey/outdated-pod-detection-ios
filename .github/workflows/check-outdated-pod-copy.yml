@@ -73,6 +73,7 @@ jobs:
 
       
           echo '${{ fromJson(env.number) }}'
+          echo '${{ toJSON(env.number[0].number) }}'
 
       - run: echo "PACKAGE_JSON=$(jq -c . < ${{ env.number }})" >> $GITHUB_ENV
       - run: echo '${{ fromJson(env.PACKAGE_JSON).number }}'
