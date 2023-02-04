@@ -39,14 +39,26 @@ jobs:
           cd Example
           echo "CURRENT_VERSION=$(pod outdated | grep -i 'Amplitude' | cut -d ">" -f2 | cut -d "(" -f1 | sed 's/ //g')" >> $GITHUB_ENV
           echo "LATEST_VERSION=$(pod outdated | grep -i 'Amplitude' | cut -d "(" -f2 | cut -d ")" -f1)" >> $GITHUB_ENV
+      - name: Is latest version exist
+        if: env.LATEST_VERSION != ''
+        run: |
+          echo "HAS_ANY_OUTDATED=true" >> $GITHUB_ENV
       - name: Set title, body, label and assignee
         run: |
-          echo "Update Amplitude from current version: ${{ env.CURRENT_VERSION }} to the ${{ env.LATEST_VERSION }}"
           echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
           echo "BODY=Update Amplitude from current version: ${{ env.CURRENT_VERSION }} to the ${{ env.LATEST_VERSION }}" >> $GITHUB_ENV
           echo "LABELS=outdatedPod" >> $GITHUB_ENV
           echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
-          echo "POD_NEEDS_UPDATE=${{ steps.outdated.outputs.has_any_outdated }}" >> $GITHUB_ENV
+          echo "POD_NEEDS_UPDATE=${{ env.HAS_ANY_OUTDATED }}" >> $GITHUB_ENV
+        # echo "POD_NEEDS_UPDATE=${{ steps.outdated.outputs.has_any_outdated }}" >> $GITHUB_ENV
+      
+      - name: Print values
+        run: |
+          echo ${{ env.TITLE }}
+          echo ${{ env.BODY }}
+          echo ${{ env.LABELS }}
+          echo ${{ env.ASSIGNEE }}
+          echo ${{ env.POD_NEEDS_UPDATE }}
           
       # # - name: Create an issue if outdated pods are detected 
       # #   if: steps.outdated.outputs.has_any_outdated != 'false'
