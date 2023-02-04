@@ -64,7 +64,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           SK: ${{ toJSON(env.number) }}
-          DJ: ${{ fromJSON(env.SK) }}
           COMMITS: ${{ fromJSON(env.number) }}
         shell: bash
         run: |
@@ -74,7 +73,6 @@ jobs:
           echo '${{ fromJson(env.number) }}'
           echo '${{ toJSON(env.number[0]) }}'
           echo "$COMMITS"
-          echo "$DJ"
       - name: Print again
         run: |
           echo "${{ env.number }}"
