@@ -70,7 +70,7 @@ jobs:
       # #     update_existing: true
 
       - name: Check if issue exist or not
-        if: env.POD_NEEDS_UPDATE != 'false' && env.BODY != 'false'
+        if: env.POD_NEEDS_UPDATE != 'false' # && env.BODY != 'false'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
