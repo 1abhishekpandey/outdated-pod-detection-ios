@@ -58,12 +58,15 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
+      - name: Create new label
+        if: gh label list --search outdatedPod == ''
+        run: |
+          gh label create outdatedPod --description "Pod is outdated" --color FBCA04
       - name: Create new issue
         if: steps.outdated.outputs.has_any_outdated != 'false' && env.number == ''
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
-          gh label create --force outdatedPod --description "Pod is outdated" --color FBCA04
           gh issue create -a "${{ env.ASSIGNEE }}" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
       - name: Edit existing issue
         if: steps.outdated.outputs.has_any_outdated != 'false' && env.number != ''
