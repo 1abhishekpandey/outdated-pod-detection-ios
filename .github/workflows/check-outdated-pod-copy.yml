@@ -52,7 +52,7 @@ jobs:
 
       - name: Check if issue exist or not
         if: env.BODY != 'false'
-        id: issue
+        # id: issue
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
