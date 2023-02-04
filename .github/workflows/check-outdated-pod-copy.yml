@@ -33,7 +33,7 @@ jobs:
           TITLE: "fix: update Amplitude SDK to the latest version"
           BODY: "${{steps.outdated.outputs.outdated_pod_info}}"
         run: |
-          echo ${{env.TITLE}} ${{env.BODY}}
+          echo "${{env.TITLE}} ${{env.BODY}}"
 
       # - name: Print outdated pods
       #   if: steps.outdated.outputs.has_any_outdated != 'false'
