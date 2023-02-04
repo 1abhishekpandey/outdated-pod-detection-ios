@@ -66,6 +66,7 @@ jobs:
         run: |
           echo "${{ env.abc }}"
           echo "${{ env.abc }}" | cut -d " " -f 1
+          echo "${{ env.first }}"
           echo "${{ env.abc[0] }}"
       - name: Set the value
         id: step_one
