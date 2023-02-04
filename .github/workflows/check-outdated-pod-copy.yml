@@ -65,6 +65,7 @@ jobs:
         run: |
           echo "${{ env.abc }}"
           echo "${{ env.abd }}"
+          echo "${env.abc[0]}"
       - name: Set the value
         id: step_one
         run: |
