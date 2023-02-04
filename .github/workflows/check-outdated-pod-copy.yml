@@ -31,14 +31,14 @@ jobs:
         if: env.LATEST_VERSION != ''
         run: |
           echo "HAS_ANY_OUTDATED=true" >> $GITHUB_ENV
-      - name: Set title, body, label and assignee
+      - name: Set constant values
         run: |
           echo "TITLE=fix: update ${{ env.SDK }} SDK to the latest version" >> $GITHUB_ENV
           echo "BODY=Update the ${{ env.SDK }} SDK from the current version ${{ env.CURRENT_VERSION }} to the ${{ env.LATEST_VERSION }}." >> $GITHUB_ENV
           echo "LABELS=outdatedPod" >> $GITHUB_ENV
           echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
           echo "POD_NEEDS_UPDATE=${{ env.HAS_ANY_OUTDATED }}" >> $GITHUB_ENV
-      - name: Print values
+      - name: Print constant values
         run: |
           echo ${{ env.TITLE }}
           echo ${{ env.BODY }}
