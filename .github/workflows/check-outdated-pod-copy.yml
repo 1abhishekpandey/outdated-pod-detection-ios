@@ -40,15 +40,15 @@ jobs:
           echo "LABELS=outdatedPod" >> $GITHUB_ENV
           echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
           echo "POD_NEEDS_UPDATE=${{ steps.outdated.outputs.has_any_outdated }}" >> $GITHUB_ENV
-      # - name: Print info
-      #   if: steps.outdated.outputs.has_any_outdated != 'false'
-      #   run: |
-      #     echo "Successfull"
-      #     echo "${{ env.TITLE }}"
-      #     echo "${{ env.BODY }}"
-      #     echo "${{ env.LABELS }}"
-      #     echo "${{ env.ASSIGNEE }}"
-
+      - name: Print info
+        if: steps.outdated.outputs.has_any_outdated != 'false'
+        run: |
+          echo "Successfull"
+          echo "${{ env.TITLE }}"
+          echo "${{ env.BODY }}"
+          echo "${{ env.LABELS }}"
+          echo "${{ env.ASSIGNEE }}"
+          echo "${{ env.POD_NEEDS_UPDATE }}"
       # # - name: Create an issue if outdated pods are detected 
       # #   if: steps.outdated.outputs.has_any_outdated != 'false'
       # #   uses: JasonEtco/create-an-issue@v2
