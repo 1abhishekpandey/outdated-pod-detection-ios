@@ -27,7 +27,7 @@ jobs:
           project_directory: Example
           podspec: Rudder-Amplitude.podspec
           exclude_pods: Rudder
-      - name: Apple
+      - name: Set title, body and label
         env:
           TITLE: "fix: update Amplitude SDK to the latest version"
           BODY: "${{steps.outdated.outputs.outdated_pod_info}}"
