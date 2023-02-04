@@ -58,4 +58,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "abc=$(gh issue list | grep 'fix: update Amplitude SDK to the latest version')" >> $GITHUB_OUTPUT
-      
+          echo ${{ steps.version.abc }}
