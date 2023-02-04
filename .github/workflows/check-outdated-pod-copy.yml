@@ -65,7 +65,7 @@ jobs:
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue create -a "1abhishekpandey" -b "$env.BODY" -t "$env.TITLE" --label "$env.LABELS"
+          gh issue create -a "1abhishekpandey" -b ${{ env.BODY }} -t ${{ env.TITLE }} --label ${{ env.LABELS }}
       - name: Edit existing issue
         if: env.number != ''
         env:
