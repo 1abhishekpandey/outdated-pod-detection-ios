@@ -61,7 +61,7 @@ jobs:
           number2="$(gh issue list --search "fix: update Amplitude SDK to the latest version" --json number | jq '.[].number')"
         # gh issue edit $number2 --body "abcds5"    
       - name: Print issue
-        # if
+        if: steps.version.number2 != null
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
