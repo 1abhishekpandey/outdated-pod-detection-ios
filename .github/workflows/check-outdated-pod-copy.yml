@@ -30,7 +30,7 @@ jobs:
       - name: Set title, body and label
         id: issue
         run: |
-          echo "TITLE=(fix: update Amplitude SDK to the latest version)" >> $GITHUB_ENV
+          echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
           
           echo "LABELS=outdatedPods" >> $GITHUB_ENV
         # echo "BODY=$(${{steps.outdated.outputs.outdated_pod_info}})" >> $GITHUB_ENV
@@ -38,7 +38,7 @@ jobs:
         if: steps.outdated.outputs.has_any_outdated != 'false'
         run: |
           echo "Successfull"
-          echo "${{ env.BODY }}"
+          echo "${{ env.TITLE }}"
           echo "${{ env.LABELS }}"
 
       # # - name: Create an issue if outdated pods are detected 
