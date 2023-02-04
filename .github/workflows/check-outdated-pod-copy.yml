@@ -43,7 +43,7 @@ jobs:
         #   exclude_pods: Rudder
         run: |
           cd Example
-          echo "POD_INFO=pod outdated | grep -i 'Amplitude'" >> $GITHUB_ENV
+          echo "POD_INFO=$( pod outdated | grep -i 'Amplitude' )" >> $GITHUB_ENV
 
 
       - name: Set title, body, label and assignee
