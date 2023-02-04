@@ -1,2 +1,3 @@
-number=$(gh issue list --search 'fix: update Amplitude SDK to the latest version' | cut -d " " -f 1)
-echo ${number}
+# number=$(gh issue list --search "fix: update Amplitude SDK to the latest version" --json number)
+# echo ${number}
+echo '[{"number":21}]' | jq '.[].number'
