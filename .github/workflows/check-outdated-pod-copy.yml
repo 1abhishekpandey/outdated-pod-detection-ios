@@ -20,24 +20,20 @@ jobs:
           cd example
           rm podfile.lock
           pod install
-      # - name: Check outdated pods
-      #   uses: yatatsu/pod-outdated-check-action@v0.3.0
-      #   id: outdated
-      #   with:
-      #     project_directory: Example
-      #     podspec: Rudder-Amplitude.podspec
-      #     exclude_pods: Rudder
-
-      - uses: actions/setup-node@v1
+      - name: Check outdated pods
+        uses: yatatsu/pod-outdated-check-action@v0.3.0
+        id: outdated
         with:
-          node-version: 16.x
-      - run: |
-          cd example
-          npm install
-          npm run build
-          npm run lint
-          npm run test
-          npm run package
+          project_directory: Example
+          podspec: Rudder-Amplitude.podspec
+          exclude_pods: Rudder
+
+      - name: Set title and body
+        env:
+          TITLE: "fix: update Amplitude SDK to the latest version"
+          BODY: "${{steps.outdated.outputs.outdated_pod_info}}"
+        run: |
+          echo ${{env.TITLE}} ${{env.BODY}}
 
       # - name: Print outdated pods
       #   if: steps.outdated.outputs.has_any_outdated != 'false'
