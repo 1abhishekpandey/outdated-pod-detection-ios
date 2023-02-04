@@ -57,17 +57,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          echo "abc=$(gh issue list --search "fix: update Amplitude SDK to the latest version")" >> $GITHUB_ENV
-          echo "abd=$(gh issue list --search 'fix: update Amplitude SDK to the latest version' | cut -d " " -f 1)" >> $GITHUB_ENV
           echo "number=$(gh issue list --search "fix: update Amplitude SDK to the latest version" --json number | jq '.[].number')" >> $GITHUB_ENV
+          gh issue edit $number --body "abcds3"  
+        # gh issue edit $env.number --body "abcds3"  
       - name: Print issue
         env:
           GH_TOKEN: ${{ github.token }}
           # COMMITS: ${{ toJSON(env.number) }}
         shell: bash
         run: |
-          echo "${{ env.abc }}"
-          echo "${{ env.abd }}"
           echo "${{ env.number }}"
-          gh issue edit 21 --body "abcds2"     
+        # gh issue edit 21 --body "abcds2"     
           
