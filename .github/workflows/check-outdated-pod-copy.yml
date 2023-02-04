@@ -46,4 +46,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue create -a "1abhishekpandey" -b "${{ steps.outdated.outputs.outdated_pod_info }}" -t "fix: update {{ Amplitude }} SDK to the latest version"
+          gh issue create -a "1abhishekpandey" -b "${{ steps.outdated.outputs.outdated_pod_info }}" -t "fix: update Amplitude SDK to the latest version"
