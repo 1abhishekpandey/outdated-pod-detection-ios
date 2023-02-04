@@ -61,3 +61,11 @@ jobs:
           echo ${{ steps.version.abc }}
           echo "abd=$(${{ steps.version.abc[0] }})"
           echo ${{ steps.version.abd }}
+      - name: Set the value
+        id: step_one
+        run: |
+          echo "action_state=yellow" >> $GITHUB_ENV
+      - name: Use the value
+        id: step_two
+        run: |
+          echo "${{ env.action_state }}" # This will output 'yellow'
