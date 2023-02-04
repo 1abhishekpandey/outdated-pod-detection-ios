@@ -32,14 +32,13 @@ jobs:
         env:
           TITLE: "fix: update Amplitude SDK to the latest version"
           BODY: "${{steps.outdated.outputs.outdated_pod_info}}"
-        run: |
-          echo "${{env.TITLE}} ${{env.BODY}}"
+          LABELS: outdatedPods
 
-      # - name: Print outdated pods
-      #   if: steps.outdated.outputs.has_any_outdated != 'false'
-      #   run: |
-      #     echo "Successfull"
-      #     echo "${{ steps.outdated.outputs.outdated_pod_info }}"
+      - name: Print outdated pods
+        if: steps.outdated.outputs.has_any_outdated != 'false'
+        run: |
+          echo "Successfull"
+          echo "${{ env.BODY }}"
 
       # # - name: Create an issue if outdated pods are detected 
       # #   if: steps.outdated.outputs.has_any_outdated != 'false'
@@ -52,22 +51,22 @@ jobs:
       # #     filename: .github/outdated-pod-template.md
       # #     update_existing: true
 
-      # - name: Check if issue exist or not
-      #   if: steps.outdated.outputs.has_any_outdated != 'false'
-      #   id: issue
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     echo "number=$(gh issue list --search "fix: update Amplitude SDK to the latest version" --json number | jq '.[].number')" >> $GITHUB_ENV
-      # - name: Create new issue
-      #   if: env.number == ''
-      #   env:
-      #       GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     gh issue create -a "1abhishekpandey" -b "${{ steps.outdated.outputs.outdated_pod_info }}" -t "fix: update Amplitude SDK to the latest version" --label "outdatedPods"
-      # - name: Edit existing issue
-      #   if: env.number != ''
-      #   env:
-      #       GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     gh issue edit ${{env.number}} --body "${{ steps.outdated.outputs.outdated_pod_info }}"
+      - name: Check if issue exist or not
+        if: env.BODY != 'false'
+        id: issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
+      - name: Create new issue
+        if: env.number == ''
+        env:
+            GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
+      - name: Edit existing issue
+        if: env.number != ''
+        env:
+            GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue edit ${{ env.number }} --body "${{ env.BODY }}"
