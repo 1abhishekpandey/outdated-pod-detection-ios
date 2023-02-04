@@ -64,7 +64,7 @@ jobs:
           gh label create outdatedPod --description "Pod is outdated" --color FBCA04
           gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
       - name: Edit existing issue
-        if: env.number != ''
+        if: steps.outdated.outputs.has_any_outdated != 'false' && env.number != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
