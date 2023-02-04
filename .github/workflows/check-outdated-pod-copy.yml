@@ -19,16 +19,23 @@ jobs:
           cd example
           rm podfile.lock
           pod install
-      - name: Check outdated pods
-        uses: yatatsu/pod-outdated-check-action@v0.3.0
-        id: outdated
-        with:
-          project_directory: Example
-          podspec: Rudder-Amplitude.podspec
-          exclude_pods: Rudder
       # - name: Check outdated pods
-      #   uses: MeilCli/cocoapods-update-check-action@v3
+      #   uses: yatatsu/pod-outdated-check-action@v0.3.0
       #   id: outdated
+      #   with:
+      #     project_directory: Example
+      #     podspec: Rudder-Amplitude.podspec
+      #     exclude_pods: Rudder
+      # - name: Set title, body, label and assignee
+      #   run: |
+      #     echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
+      #     echo "BODY=${{ steps.outdated.outputs.outdated_pod_info }}" >> $GITHUB_ENV
+      #     echo "LABELS=outdatedPod" >> $GITHUB_ENV
+      #     echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
+      #     echo "POD_NEEDS_UPDATE=${{ steps.outdated.outputs.has_any_outdated }}" >> $GITHUB_ENV
+      - name: Check outdated pods 2
+        uses: MeilCli/cocoapods-update-check-action@v3
+        id: outdated
       #   with:
       #     project_directory: Example
       #     podspec: Rudder-Amplitude.podspec
@@ -36,12 +43,12 @@ jobs:
       - name: Set title, body, label and assignee
         run: |
           echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
-          echo "BODY=${{ steps.outdated.outputs.outdated_pod_info }}" >> $GITHUB_ENV
+          echo "BODY=${{ steps.outdated.outputs.pod_update_text }}" >> $GITHUB_ENV
           echo "LABELS=outdatedPod" >> $GITHUB_ENV
           echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
-          echo "POD_NEEDS_UPDATE=${{ steps.outdated.outputs.has_any_outdated }}" >> $GITHUB_ENV
+          echo "POD_NEEDS_UPDATE=${{ steps.outdated.outputs.has_pod_update }}" >> $GITHUB_ENV
       - name: Print info
-        if: steps.outdated.outputs.has_any_outdated != 'false'
+        if: env.POD_NEEDS_UPDATE != 'false'
         run: |
           echo "Successfull"
           echo "${{ env.TITLE }}"
