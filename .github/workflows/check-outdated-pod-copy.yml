@@ -75,4 +75,7 @@ jobs:
           echo '${{ fromJson(env.number) }}'
           echo '${{ toJSON(env.number[0]) }}'
           echo "$COMMITS"
+      - name: Print again
+        run: |
+          echo "Commits:" $number
           
