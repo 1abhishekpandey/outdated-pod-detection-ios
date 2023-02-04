@@ -20,47 +20,58 @@ jobs:
           cd example
           rm podfile.lock
           pod install
-      - name: Check outdated pods
-        uses: yatatsu/pod-outdated-check-action@v0.3.0
-        id: outdated
-        with:
-          project_directory: Example
-          podspec: Rudder-Amplitude.podspec
-          exclude_pods: Rudder
-      - name: Print outdated pods
-        if: steps.outdated.outputs.has_any_outdated != 'false'
-        run: |
-          echo "Successfull"
-          echo "${{ steps.outdated.outputs.outdated_pod_info }}"
-
-      # - name: Create an issue if outdated pods are detected 
-      #   if: steps.outdated.outputs.has_any_outdated != 'false'
-      #   uses: JasonEtco/create-an-issue@v2
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     DESCRIPTION: ${{ steps.outdated.outputs.outdated_pod_info }}
-      #     OUTDATED_SDK_NAME: Amplitude
+      # - name: Check outdated pods
+      #   uses: yatatsu/pod-outdated-check-action@v0.3.0
+      #   id: outdated
       #   with:
-      #     filename: .github/outdated-pod-template.md
-      #     update_existing: true
+      #     project_directory: Example
+      #     podspec: Rudder-Amplitude.podspec
+      #     exclude_pods: Rudder
 
-      - name: Check if issue exist or not
-        if: steps.outdated.outputs.has_any_outdated != 'false'
-        id: issue
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          echo "number=$(gh issue list --search "fix: update Amplitude SDK to the latest version" --json number | jq '.[].number')" >> $GITHUB_ENV
-      - name: Edit existing issue
-        if: env.number != ''
-        env:
-            GH_TOKEN: ${{ github.token }}
-        run: |
-          gh issue edit ${{env.number}} --body "${{ steps.outdated.outputs.outdated_pod_info }}"
-      - name: Create new issue
-        if: env.number == ''
-        env:
-            GH_TOKEN: ${{ github.token }}
-        run: |
-          gh issue create -a "1abhishekpandey" -b "${{ steps.outdated.outputs.outdated_pod_info }}" -t "fix: update Amplitude SDK to the latest version"
-      
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - run: |
+          cd example
+          npm install
+          npm run build
+          npm run lint
+          npm run test
+          npm run package
+
+      # - name: Print outdated pods
+      #   if: steps.outdated.outputs.has_any_outdated != 'false'
+      #   run: |
+      #     echo "Successfull"
+      #     echo "${{ steps.outdated.outputs.outdated_pod_info }}"
+
+      # # - name: Create an issue if outdated pods are detected 
+      # #   if: steps.outdated.outputs.has_any_outdated != 'false'
+      # #   uses: JasonEtco/create-an-issue@v2
+      # #   env:
+      # #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # #     DESCRIPTION: ${{ steps.outdated.outputs.outdated_pod_info }}
+      # #     OUTDATED_SDK_NAME: Amplitude
+      # #   with:
+      # #     filename: .github/outdated-pod-template.md
+      # #     update_existing: true
+
+      # - name: Check if issue exist or not
+      #   if: steps.outdated.outputs.has_any_outdated != 'false'
+      #   id: issue
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}
+      #   run: |
+      #     echo "number=$(gh issue list --search "fix: update Amplitude SDK to the latest version" --json number | jq '.[].number')" >> $GITHUB_ENV
+      # - name: Create new issue
+      #   if: env.number == ''
+      #   env:
+      #       GH_TOKEN: ${{ github.token }}
+      #   run: |
+      #     gh issue create -a "1abhishekpandey" -b "${{ steps.outdated.outputs.outdated_pod_info }}" -t "fix: update Amplitude SDK to the latest version" --label "outdatedPods"
+      # - name: Edit existing issue
+      #   if: env.number != ''
+      #   env:
+      #       GH_TOKEN: ${{ github.token }}
+      #   run: |
+      #     gh issue edit ${{env.number}} --body "${{ steps.outdated.outputs.outdated_pod_info }}"
