@@ -31,13 +31,17 @@ jobs:
         run: |
           echo "Successfull"
           echo "${{ steps.outdated.outputs.outdated_pod_info }}"
-      - name: Create an issue if outdated pods are detected 
+      # - name: Create an issue if outdated pods are detected 
+      #   if: steps.outdated.outputs.has_any_outdated != 'false'
+      #   uses: JasonEtco/create-an-issue@v2
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     DESCRIPTION: ${{ steps.outdated.outputs.outdated_pod_info }}
+      #     OUTDATED_SDK_NAME: Amplitude
+      #   with:
+      #     filename: .github/outdated-pod-template.md
+      #     update_existing: true
+      - name: Github Issue through comnmand
         if: steps.outdated.outputs.has_any_outdated != 'false'
-        uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DESCRIPTION: ${{ steps.outdated.outputs.outdated_pod_info }}
-          OUTDATED_SDK_NAME: Amplitude
-        with:
-          filename: .github/outdated-pod-template.md
-          update_existing: true
+        run: |
+          gh issue create -a "1abhishekpandey" -b "${{ steps.outdated.outputs.outdated_pod_info }}" -t "fix: update {{ env.OUTDATED_SDK_NAME }} SDK to the latest version"
