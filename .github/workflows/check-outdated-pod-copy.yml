@@ -51,13 +51,13 @@ jobs:
       # #     update_existing: true
 
       - name: Check if issue exist or not
-        if: env.BODY != 'false'
+        if: steps.outdated.outputs.has_any_outdated != 'false' && env.BODY != 'false'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
       - name: Create new issue
-        if: env.number == ''
+        if: steps.outdated.outputs.has_any_outdated != 'false' && env.number == ''
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
