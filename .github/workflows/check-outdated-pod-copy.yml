@@ -7,34 +7,30 @@ on:
 
 jobs:
   outdatedPods:
-    permissions:
+    # permissions:
     #   contents: 'read'
     #   id-token: 'write'
-      issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
+      # issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-
-      # - name: Install pods
-      #   run: |
-      #     cd example
-      #     rm podfile.lock
-      #     pod install
-      # - name: Check outdated pods
-      #   uses: yatatsu/pod-outdated-check-action@v0.3.0
-      #   id: outdated
-      #   with:
-      #     project_directory: Example
-      #     podspec: Rudder-Amplitude.podspec
-      #     exclude_pods: Rudder
+      - name: Install pods
+        run: |
+          cd example
+          rm podfile.lock
+          pod install
+      - name: Check outdated pods
+        uses: yatatsu/pod-outdated-check-action@v0.3.0
+        id: outdated
+        with:
+          project_directory: Example
+          podspec: Rudder-Amplitude.podspec
+          exclude_pods: Rudder
       - name: Set title, body and label
-        id: issue
         run: |
           echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
-          
+          echo "BODY=${{steps.outdated.outputs.outdated_pod_info}}" >> $GITHUB_ENV
           echo "LABELS=outdatedPod" >> $GITHUB_ENV
-          echo "BODY=Amplitude: new version available 7.2.2 -> 7.2.2 (latest version 8.14.0)" >> $GITHUB_ENV
-        # echo "BODY=${{steps.outdated.outputs.outdated_pod_info}}" >> $GITHUB_ENV
       - name: Print outdated pods info
         if: steps.outdated.outputs.has_any_outdated != 'false'
         run: |
@@ -56,7 +52,6 @@ jobs:
 
       - name: Check if issue exist or not
         if: env.BODY != 'false'
-        # id: issue
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
