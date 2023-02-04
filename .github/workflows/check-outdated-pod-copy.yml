@@ -66,11 +66,16 @@ jobs:
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
-          echo "${{ env.number }}"
           echo ${{steps.version.number2}}
         # gh issue edit ${{env.number}} --body "abcds4"     
       - name: Print issue 3
         if: ${{steps.version.number2}} == 'true'
+        env:
+            GH_TOKEN: ${{ github.token }}
+        run: |
+          echo ${{steps.version.number2}}
+      - name: Print issue 3
+        if: ${{env.number}} == 'true'
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
