@@ -63,19 +63,19 @@ jobs:
       - name: Print issue
         env:
           GH_TOKEN: ${{ github.token }}
-          COMMITS: ${{ toJSON(env.number) }}
+          SK: ${{ toJSON(env.number) }}
+          DJ: ${{ fromJSON(env.SK) }}
+          COMMITS: ${{ fromJSON(env.number) }}
         shell: bash
         run: |
           echo "${{ env.abc }}"
           echo "${{ env.abd }}"
           echo "${{ env.number }}"
-          echo "Author Email:" $(echo $number | jq -r '.number')
-
-      
           echo '${{ fromJson(env.number) }}'
           echo '${{ toJSON(env.number[0]) }}'
           echo "$COMMITS"
+          echo "$DJ"
       - name: Print again
         run: |
-          echo "Commits:" $number
+          echo "${{ env.number }}"
           
