@@ -44,7 +44,7 @@ jobs:
         run: |
           cd Example
           echo "CURRENT_VERSION='$(pod outdated | grep -i 'Amplitude' | cut -d ">" -f2 | cut -d "(" -f1 | sed 's/ //g')'" >> $GITHUB_ENV
-          echo "LATEST_VERSION='$(pod outdated | grep -i 'Amplitude' | cut -d "(" -f2 | cut -d ")" -f1 | sed 's/ //g')'" >> $GITHUB_ENV
+          echo "LATEST_VERSION=$(pod outdated | grep -i 'Amplitude' | cut -d "(" -f2 | cut -d ")" -f1)" >> $GITHUB_ENV
 
       - name: Set title, body, label and assignee
         run: |
