@@ -61,10 +61,6 @@ jobs:
           gh issue edit $number --body "abcds3"  
         # gh issue edit $env.number --body "abcds3"  
       - name: Print issue
-        env:
-          GH_TOKEN: ${{ github.token }}
-          # COMMITS: ${{ toJSON(env.number) }}
-        shell: bash
         run: |
           echo "${{ env.number }}"
         # gh issue edit 21 --body "abcds2"     
