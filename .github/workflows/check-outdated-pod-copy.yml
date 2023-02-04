@@ -33,7 +33,7 @@ jobs:
           echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
           echo "BODY=${{steps.outdated.outputs.outdated_pod_info}}" >> $GITHUB_ENV
           echo "LABELS=outdatedPods" >> $GITHUB_ENV
-      - name: Print outdated pods
+      - name: Print outdated pods info
         if: steps.outdated.outputs.has_any_outdated != 'false'
         run: |
           echo "Successfull"
@@ -52,22 +52,22 @@ jobs:
       # #     filename: .github/outdated-pod-template.md
       # #     update_existing: true
 
-      # - name: Check if issue exist or not
-      #   if: env.BODY != 'false'
-      #   # id: issue
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     echo "number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
-      # - name: Create new issue
-      #   if: env.number == ''
-      #   env:
-      #       GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
-      # - name: Edit existing issue
-      #   if: env.number != ''
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     gh issue edit ${{ env.number }} --body "${{ env.BODY }}"
+      - name: Check if issue exist or not
+        if: env.BODY != 'false'
+        # id: issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
+      - name: Create new issue
+        if: env.number == ''
+        env:
+            GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
+      - name: Edit existing issue
+        if: env.number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue edit ${{ env.number }} --body "${{ env.BODY }}"
