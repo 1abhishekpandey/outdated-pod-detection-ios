@@ -43,12 +43,13 @@ jobs:
         #   exclude_pods: Rudder
         run: |
           cd Example
-          echo "POD_INFO='$(pod outdated | grep -i "Amplitude")'" >> $GITHUB_ENV
+          echo "CURRENT_VERSION='$(pod outdated | grep -i 'Amplitude' | cut -d ">" -f2 | cut -d "(" -f1 | sed 's/ //g')'" >> $GITHUB_ENV
+          echo "LATEST_VERSION='$(pod outdated | grep -i 'Amplitude' | cut -d "(" -f2 | cut -d ")" -f1 | sed 's/ //g')'" >> $GITHUB_ENV
 
 
       - name: Set title, body, label and assignee
         run: |
-          echo ${{ env.POD_INFO }}
+          echo "Update Amplitude from current version: ${{ env.CURRENT_VERSIO }} to the ${{ env.LATEST_VERSION }}"
         # echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
         # echo "BODY=${{ steps.outdated.outputs.outdated_pod_info }}" >> $GITHUB_ENV
         # echo "LABELS=outdatedPod" >> $GITHUB_ENV
