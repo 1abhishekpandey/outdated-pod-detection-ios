@@ -70,11 +70,8 @@ jobs:
           echo "${{ env.number }}"
           
 
-          echo 'number<<EOF' >> $GITHUB_ENV
-          cat ./number >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
       
           echo '${{ fromJson(env.number).number }}'
 
-      - run: echo "PACKAGE_JSON=$(jq -c . < ${{ env.number }})" >> $GITHUB_ENV
-      - run: echo '${{ fromJson(env.PACKAGE_JSON).number }}'
+      # - run: echo "PACKAGE_JSON=$(jq -c . < ${{ env.number }})" >> $GITHUB_ENV
+      - run: echo '${{ fromJson(env.number).number }}'
