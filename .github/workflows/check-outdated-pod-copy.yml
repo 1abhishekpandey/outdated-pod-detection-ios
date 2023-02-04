@@ -57,5 +57,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          echo "abc=$(gh issue list | grep 'fix: update Amplitude SDK to the latest version')"
+          echo "abc=$(gh issue list | grep 'fix: update Amplitude SDK to the latest version')" >> $GITHUB_ENV
           echo ${{ steps.version.abc }}
+          abd = ${{ steps.version.abc[0] }}
+          echo $abd
