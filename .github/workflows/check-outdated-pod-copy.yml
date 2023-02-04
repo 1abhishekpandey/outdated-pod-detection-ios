@@ -62,11 +62,18 @@ jobs:
           echo $number2
         # gh issue edit $number2 --body "abcds5"    
       - name: Print issue
-        if: steps.version.number2 != ''
+        if: ${{steps.version.number2}} != ''
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
           echo "${{ env.number }}"
           echo ${{steps.version.number2}}
         # gh issue edit ${{env.number}} --body "abcds4"     
+      - name: Print issue 3
+        if: [${{steps.version.number2}} != '']
+        env:
+            GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "${{ env.number }}"
+          echo ${{steps.version.number2}}
           
