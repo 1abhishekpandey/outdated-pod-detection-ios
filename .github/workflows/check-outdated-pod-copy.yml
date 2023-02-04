@@ -65,5 +65,5 @@ jobs:
             GH_TOKEN: ${{ github.token }}
         run: |
           echo "${{ env.number }}"
-          gh issue edit $env.number --body "abcds4"     
+          gh issue edit ${{env.number}} --body "abcds4"     
           
