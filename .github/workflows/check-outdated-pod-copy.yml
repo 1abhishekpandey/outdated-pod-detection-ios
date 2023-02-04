@@ -58,13 +58,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "abc=$(gh issue list | grep 'fix: update Amplitude SDK to the latest version')" >> $GITHUB_ENV
-          echo "abd=${{ steps.version.abc[0] }}" >> $GITHUB_ENV
       - name: Print issue 
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "${{ env.abc }}"
-          echo "${{ env.abd }}"
+          echo "${{ env.abc[0] }}"
           echo "${env.abc[0]}"
       - name: Set the value
         id: step_one
