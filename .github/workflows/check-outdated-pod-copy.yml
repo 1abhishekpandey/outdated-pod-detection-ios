@@ -36,7 +36,8 @@ jobs:
       - name: Check outdated pods 2
         uses: MeilCli/cocoapods-update-check-action@v3
         id: outdated
-      #   with:
+        with:
+          execute_directories: Example
       #     project_directory: Example
       #     podspec: Rudder-Amplitude.podspec
       #     exclude_pods: Rudder
