@@ -27,12 +27,10 @@ jobs:
           project_directory: Example
           podspec: Rudder-Amplitude.podspec
           exclude_pods: Rudder
-
-      - name: Set title and body
         env:
           TITLE: "fix: update Amplitude SDK to the latest version"
           BODY: "${{steps.outdated.outputs.outdated_pod_info}}"
-          LABELS: outdatedPods
+          LABELS: "outdatedPods"
 
       - name: Print outdated pods
         if: steps.outdated.outputs.has_any_outdated != 'false'
