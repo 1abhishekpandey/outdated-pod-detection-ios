@@ -30,9 +30,9 @@ jobs:
       - name: Set title, body and label
         id: issue
         run: |
-          echo "TITLE=fix: update Amplitude SDK to the latest version"
-          echo "BODY=${{steps.outdated.outputs.outdated_pod_info}}"
-          echo "LABELS=outdatedPods"
+          echo "TITLE=$(fix: update Amplitude SDK to the latest version)" >> $GITHUB_ENV
+          echo "BODY=$(${{steps.outdated.outputs.outdated_pod_info}})" >> $GITHUB_ENV
+          echo "LABELS=$(outdatedPods)" >> $GITHUB_ENV
       - name: Print outdated pods
         if: steps.outdated.outputs.has_any_outdated != 'false'
         run: |
@@ -56,13 +56,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          echo "number=$(gh issue list --search "${{ steps.issue.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
+          echo "number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
       - name: Create new issue
         if: env.number == ''
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue create -a "1abhishekpandey" -b "${{ steps.issue.BODY }}" -t "${{ steps.issue.TITLE }}" --label "${{ steps.issue.LABELS }}"
+          gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
       - name: Edit existing issue
         if: env.number != ''
         env:
