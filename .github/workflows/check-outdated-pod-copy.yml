@@ -19,6 +19,8 @@ jobs:
           cd example
           rm podfile.lock
           pod install
+      - name: SDK name
+        run: echo "SDK=Amplitude" >> $GITHUB_ENV
       # - name: Check outdated pods
       #   uses: yatatsu/pod-outdated-check-action@v0.3.0
       #   id: outdated
@@ -37,8 +39,8 @@ jobs:
       - name: Check outdated pods
         run: |
           cd Example
-          echo "CURRENT_VERSION=$(pod outdated | grep -i 'Amplitude' | cut -d ">" -f2 | cut -d "(" -f1 | sed 's/ //g')" >> $GITHUB_ENV
-          echo "LATEST_VERSION=$(pod outdated | grep -i 'Amplitude' | cut -d "(" -f2 | cut -d ")" -f1)" >> $GITHUB_ENV
+          echo "CURRENT_VERSION=$(pod outdated | grep -i '${{ env.SDK }}' | cut -d ">" -f2 | cut -d "(" -f1 | sed 's/ //g')" >> $GITHUB_ENV
+          echo "LATEST_VERSION=$(pod outdated | grep -i '${{ env.SDK }}' | cut -d "(" -f2 | cut -d ")" -f1)" >> $GITHUB_ENV
           echo "HAS_ANY_OUTDATED=false" >> $GITHUB_ENV
       - name: Is latest version exist
         if: env.LATEST_VERSION != ''
@@ -46,8 +48,8 @@ jobs:
           echo "HAS_ANY_OUTDATED=true" >> $GITHUB_ENV
       - name: Set title, body, label and assignee
         run: |
-          echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
-          echo "BODY=Update Amplitude from current version: ${{ env.CURRENT_VERSION }} to the ${{ env.LATEST_VERSION }}" >> $GITHUB_ENV
+          echo "TITLE=fix: update ${{ env.SDK }} SDK to the latest version" >> $GITHUB_ENV
+          echo "BODY=Update ${{ env.SDK }} from current version: ${{ env.CURRENT_VERSION }} to the ${{ env.LATEST_VERSION }}" >> $GITHUB_ENV
           echo "LABELS=outdatedPod" >> $GITHUB_ENV
           echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
           echo "POD_NEEDS_UPDATE=${{ env.HAS_ANY_OUTDATED }}" >> $GITHUB_ENV
