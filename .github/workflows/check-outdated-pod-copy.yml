@@ -14,28 +14,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
+      - name: SDK name
+        run: echo "SDK=Amplitude" >> $GITHUB_ENV
       - name: Install pods
         run: |
           cd example
           rm podfile.lock
           pod install
-      - name: SDK name
-        run: echo "SDK=Amplitude" >> $GITHUB_ENV
-      # - name: Check outdated pods
-      #   uses: yatatsu/pod-outdated-check-action@v0.3.0
-      #   id: outdated
-      #   with:
-      #     project_directory: Example
-      #     podspec: Rudder-Amplitude.podspec
-      #     exclude_pods: Rudder
-      # - name: Set title, body, label and assignee
-      #   run: |
-      #     echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
-      #     echo "BODY=${{ steps.outdated.outputs.outdated_pod_info }}" >> $GITHUB_ENV
-      #     echo "LABELS=outdatedPod" >> $GITHUB_ENV
-      #     echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
-      #     echo "POD_NEEDS_UPDATE=${{ steps.outdated.outputs.has_any_outdated }}" >> $GITHUB_ENV
-
       - name: Check outdated pods
         run: |
           cd Example
@@ -61,6 +46,21 @@ jobs:
           echo ${{ env.ASSIGNEE }}
           echo ${{ env.POD_NEEDS_UPDATE }}
           
+      # - name: Check outdated pods
+      #   uses: yatatsu/pod-outdated-check-action@v0.3.0
+      #   id: outdated
+      #   with:
+      #     project_directory: Example
+      #     podspec: Rudder-Amplitude.podspec
+      #     exclude_pods: Rudder
+      # - name: Set title, body, label and assignee
+      #   run: |
+      #     echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
+      #     echo "BODY=${{ steps.outdated.outputs.outdated_pod_info }}" >> $GITHUB_ENV
+      #     echo "LABELS=outdatedPod" >> $GITHUB_ENV
+      #     echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
+      #     echo "POD_NEEDS_UPDATE=${{ steps.outdated.outputs.has_any_outdated }}" >> $GITHUB_ENV
+
       # # - name: Create an issue if outdated pods are detected 
       # #   if: steps.outdated.outputs.has_any_outdated != 'false'
       # #   uses: JasonEtco/create-an-issue@v2
@@ -73,20 +73,20 @@ jobs:
       # #     update_existing: true
 
       - name: Check if issue exist or not
-        if: env.POD_NEEDS_UPDATE != 'false' # && env.BODY != 'false'
+        if: env.POD_NEEDS_UPDATE == 'true' # && env.BODY != 'false'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "issue_number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
       - name: Create new issue
-        if: env.POD_NEEDS_UPDATE != 'false' && env.issue_number == ''
+        if: env.POD_NEEDS_UPDATE == 'true' && env.issue_number == ''
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
           gh label create --force outdatedPod --description "Pod is outdated" --color FBCA04
           gh issue create -a "${{ env.ASSIGNEE }}" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
       - name: Edit existing issue
-        if: env.POD_NEEDS_UPDATE != 'false' && env.issue_number != ''
+        if: env.POD_NEEDS_UPDATE == 'true' && env.issue_number != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
