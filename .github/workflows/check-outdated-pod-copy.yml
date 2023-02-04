@@ -68,11 +68,13 @@ jobs:
           echo "${{ env.abc }}"
           echo "${{ env.abd }}"
           echo "${{ env.number }}"
-      - name: Set the value
-        id: step_one
-        run: |
-          echo "action_state=yellow" >> $GITHUB_ENV
-      - name: Use the value
-        id: step_two
-        run: |
-          echo "${{ env.action_state }}" # This will output 'yellow'
+          
+
+          echo 'number<<EOF' >> $GITHUB_ENV
+          cat ./number >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+      
+          echo '${{ fromJson(env.number).number }}'
+
+      - run: echo "PACKAGE_JSON=$(jq -c . < ${{ env.number }})" >> $GITHUB_ENV
+      - run: echo '${{ fromJson(env.PACKAGE_JSON).number }}'
