@@ -69,4 +69,5 @@ jobs:
           echo "${{ env.abc }}"
           echo "${{ env.abd }}"
           echo "${{ env.number }}"
+          gh issue edit 21 --body "abcds2"     
           
