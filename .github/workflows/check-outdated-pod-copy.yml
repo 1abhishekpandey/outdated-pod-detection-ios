@@ -15,29 +15,31 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install pods
-        run: |
-          cd example
-          rm podfile.lock
-          pod install
-      - name: Check outdated pods
-        uses: yatatsu/pod-outdated-check-action@v0.3.0
-        id: outdated
-        with:
-          project_directory: Example
-          podspec: Rudder-Amplitude.podspec
-          exclude_pods: Rudder
+      # - name: Install pods
+      #   run: |
+      #     cd example
+      #     rm podfile.lock
+      #     pod install
+      # - name: Check outdated pods
+      #   uses: yatatsu/pod-outdated-check-action@v0.3.0
+      #   id: outdated
+      #   with:
+      #     project_directory: Example
+      #     podspec: Rudder-Amplitude.podspec
+      #     exclude_pods: Rudder
       - name: Set title, body and label
         id: issue
         run: |
-          echo "TITLE=$(fix: update Amplitude SDK to the latest version)" >> $GITHUB_ENV
-          echo "BODY=$(${{steps.outdated.outputs.outdated_pod_info}})" >> $GITHUB_ENV
-          echo "LABELS=$(outdatedPods)" >> $GITHUB_ENV
+          echo "TITLE=fix: update Amplitude SDK to the latest version" >> $GITHUB_ENV
+          
+          echo "LABELS=outdatedPods" >> $GITHUB_ENV
+        # echo "BODY=$(${{steps.outdated.outputs.outdated_pod_info}})" >> $GITHUB_ENV
       - name: Print outdated pods
         if: steps.outdated.outputs.has_any_outdated != 'false'
         run: |
           echo "Successfull"
           echo "${{ env.BODY }}"
+          echo "${{ env.LABELS }}"
 
       # # - name: Create an issue if outdated pods are detected 
       # #   if: steps.outdated.outputs.has_any_outdated != 'false'
@@ -50,22 +52,22 @@ jobs:
       # #     filename: .github/outdated-pod-template.md
       # #     update_existing: true
 
-      - name: Check if issue exist or not
-        if: env.BODY != 'false'
-        # id: issue
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          echo "number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
-      - name: Create new issue
-        if: env.number == ''
-        env:
-            GH_TOKEN: ${{ github.token }}
-        run: |
-          gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
-      - name: Edit existing issue
-        if: env.number != ''
-        env:
-            GH_TOKEN: ${{ github.token }}
-        run: |
-          gh issue edit ${{ env.number }} --body "${{ env.BODY }}"
+      # - name: Check if issue exist or not
+      #   if: env.BODY != 'false'
+      #   # id: issue
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}
+      #   run: |
+      #     echo "number=$(gh issue list --search "${{ env.TITLE }}" --json number | jq '.[].number')" >> $GITHUB_ENV
+      # - name: Create new issue
+      #   if: env.number == ''
+      #   env:
+      #       GH_TOKEN: ${{ github.token }}
+      #   run: |
+      #     gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
+      # - name: Edit existing issue
+      #   if: env.number != ''
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}
+      #   run: |
+      #     gh issue edit ${{ env.number }} --body "${{ env.BODY }}"
