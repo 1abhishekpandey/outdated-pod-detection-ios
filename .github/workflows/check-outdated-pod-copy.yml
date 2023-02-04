@@ -59,7 +59,8 @@ jobs:
         run: |
           echo "number=$(gh issue list --search "fix: update Amplitude SDK to the latest version" --json number | jq '.[].number')" >> $GITHUB_ENV
           $number2=$(gh issue list --search "fix: update Amplitude SDK to the latest version" --json number | jq '.[].number')
-          gh issue edit ${{steps.version.number2}} --body "abcds5"    
+          echo $number2
+        # gh issue edit ${{steps.version.number2}} --body "abcds5"    
         # gh issue edit $env.number --body "abcds3"  
         # gh issue edit $number --body "abcds3"  
       - name: Print issue
