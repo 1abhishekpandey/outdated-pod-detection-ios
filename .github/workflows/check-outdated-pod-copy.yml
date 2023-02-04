@@ -39,6 +39,7 @@ jobs:
           cd Example
           echo "CURRENT_VERSION=$(pod outdated | grep -i 'Amplitude' | cut -d ">" -f2 | cut -d "(" -f1 | sed 's/ //g')" >> $GITHUB_ENV
           echo "LATEST_VERSION=$(pod outdated | grep -i 'Amplitude' | cut -d "(" -f2 | cut -d ")" -f1)" >> $GITHUB_ENV
+          echo "HAS_ANY_OUTDATED=false" >> $GITHUB_ENV
       - name: Is latest version exist
         if: env.LATEST_VERSION != ''
         run: |
