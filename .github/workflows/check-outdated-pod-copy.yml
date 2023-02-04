@@ -50,7 +50,6 @@ jobs:
           echo "LABELS=outdatedPod" >> $GITHUB_ENV
           echo "ASSIGNEE=1abhishekpandey" >> $GITHUB_ENV
           echo "POD_NEEDS_UPDATE=${{ env.HAS_ANY_OUTDATED }}" >> $GITHUB_ENV
-        # echo "POD_NEEDS_UPDATE=${{ steps.outdated.outputs.has_any_outdated }}" >> $GITHUB_ENV
       - name: Print values
         run: |
           echo ${{ env.TITLE }}
