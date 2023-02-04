@@ -7,10 +7,10 @@ on:
 
 jobs:
   outdatedPods:
-    # permissions:
+    permissions:
     #   contents: 'read'
     #   id-token: 'write'
-    #   issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
+      issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -66,7 +66,7 @@ jobs:
         env:
             GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" 
+          gh issue create -a "1abhishekpandey" -b "${{ env.BODY }}" -t "${{ env.TITLE }}" --label "${{ env.LABELS }}"
       - name: Edit existing issue
         if: env.number != ''
         env:
