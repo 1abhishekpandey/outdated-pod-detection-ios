@@ -1,3 +1,4 @@
+name: main
 on: [push, workflow_dispatch]
 
 jobs:
@@ -15,6 +16,8 @@ jobs:
           labels: 'outdatedPod'
           assignee: '1abhishekpandey'
           body: "Update the SDK"
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       # Use the output from the `hello` step
       - name: Get the output time
