@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: 1abhishekpandey/hello-world-javascript-action@main
+        uses: 1abhishekpandey/pod-outdated-check-and-create-github-issue@main
         with:
           who-to-greet: 'Mona the Octocat'
       # Use the output from the `hello` step
