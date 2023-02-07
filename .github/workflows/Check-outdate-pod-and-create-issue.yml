@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Check outdated pods and create issue
         id: check-outdated-pods-and-create-issue
-        uses: 1abhishekpandey/pod-outdated-check-and-create-github-issue@main
+        uses: 1abhishekpandey/pod-outdated-check-and-create-github-issue@develop
         with:
           outdated-pod-name: 'Amplitude'
           directory: 'Example'
