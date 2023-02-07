@@ -12,6 +12,11 @@ jobs:
         uses: 1abhishekpandey/pod-outdated-check-and-create-github-issue@main
         with:
           who-to-greet: 'Mona the Octocat'
+          name-of-the-sdk: 'Amplitude'
+          directory: 'Example'
+          labels: 'outdatedPod'
+          assignee: '1abhishekpandey'
+
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
