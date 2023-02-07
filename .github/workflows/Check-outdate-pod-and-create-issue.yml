@@ -1,10 +1,10 @@
-name: main
+name: Check outdate pod and create issue
 on: [push, workflow_dispatch]
 
 jobs:
   check-outdated-pods:
     runs-on: macos-latest
-    name: A job to say hello
+    name: Check outdate pods and create issue if it doesn't exist
     steps:
       - name: Check outdated pods and create issue
         id: hello
