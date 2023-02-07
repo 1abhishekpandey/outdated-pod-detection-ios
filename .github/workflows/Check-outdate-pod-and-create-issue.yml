@@ -12,7 +12,7 @@ jobs:
         with:
           outdated-pod-name: "Amplitude"
           directory: "Example"
-          title: "fix: update Amplitude SDK to the latest version"
+          title: "fix:"
           # body: "update the sdk"
           # assignee: "1abhishekpandey"
           # labels: "outdatedPod"
