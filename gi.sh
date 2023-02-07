@@ -16,13 +16,13 @@
 # done
 # echo $n
 
-n="$(gh issue list --search 'fix: update SDK to the latest version' | grep 'fix: update SDK to the latest version' | awk '{print $1}' )"
+n="$(gh issue list --search 'fix: update SDK to the latest version' | grep 'fix:' | awk '{print $1}' )"
 # words=( $n )
 # printf "%s\n" "${words[0]}" ## print array
 echo $n
 
-q="$(gh issue view $n --json title | jq '.[]')"
-echo $q
+# q="$(gh issue view $n --json title | jq '.[]')"
+# echo $q
 
 
 # MYPATH=$n

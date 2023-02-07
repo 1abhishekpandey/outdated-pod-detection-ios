@@ -14,8 +14,8 @@ jobs:
           directory: "Example"
           title: "fix:"
           # body: "update the sdk"
-          # assignee: "1abhishekpandey"
-          # labels: "outdatedPod"
+          assignee: "1abhishekpandey"
+          labels: "outdatedPod"
           # color: "FBCA04"
         env:
           GH_TOKEN: ${{ github.token }}
