@@ -20,6 +20,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       # Use the output from the `check-outdated-pods-and-create-issue` step
-      - name: Get the output time
+      - name: Get the github issue url
         if: steps.check-outdated-pods-and-create-issue.outputs.issue-url != ''
         run: echo "The Github Issue urls is ${{ steps.check-outdated-pods-and-create-issue.outputs.issue-url }}"
