@@ -13,10 +13,10 @@ jobs:
           outdated-pod-name: "Amplitude"
           directory: "Example"
           title: "fix: update SDK to the latest version 3"
-          search-issue-with-query: "fix: update SDK to the latest version"
-          assignee: "1abhishekpandey"
-          labels: "outdatedPod"
-          color: "FBCA04"
+          # search-issue-with-query: "fix: update SDK to the latest version"
+          # assignee: "1abhishekpandey"
+          # labels: "outdatedPod"
+          # color: "FBCA04"
         env:
           GH_TOKEN: ${{ github.token }}
 
