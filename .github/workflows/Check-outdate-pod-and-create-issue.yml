@@ -7,7 +7,7 @@ jobs:
     name: Check outdate pods and create issue if it doesn't exist
     steps:
       - name: Check outdated pods and create issue
-        id: hello
+        id: check-outdated-pods-and-create-issue
         uses: 1abhishekpandey/pod-outdated-check-and-create-github-issue@main
         with:
           outdated-pod-name: 'Amplitude'
@@ -19,6 +19,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-      # Use the output from the `hello` step
+      # Use the output from the `check-outdated-pods-and-create-issue` step
       - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        if: steps.check-outdated-pods-and-create-issue.outputs.issue-url != ''
+        run: echo "The Github Issue urls is ${{ steps.check-outdated-pods-and-create-issue.outputs.issue-url }}"
