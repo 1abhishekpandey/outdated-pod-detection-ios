@@ -27,10 +27,10 @@ Steps to reproduce the behavior:
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Version of the iOS SDK**
-The version of the Rudder-iOS SDK you're using (e.g., iOS SDK v1.0.0).
+**Version of the _iOS_ SDK**
+The version of the `Rudder iOS` SDK you're using (e.g., iOS SDK v1.0.0).
 
-**Mobile device mode integration version**
+**Mobile device mode integration**
 Provide following info:
 
 1. `Name` and `version` of the mobile device mode integration (e.g., RudderAmplitude iOS v1.0.0 mobile device mode integration)
@@ -42,5 +42,5 @@ Provide following info:
 1. Share the code snippet used to initialise the iOS-SDK
 2. Is the SDK initialisation dependent on something? (e.g., iOS SDK is initialised after Firebase initialisation or it is being initialised in a callback)
 
-**Have you verified correct writeKey and dataPlaneUrl are used or not**
+**Have you verified correct _writeKey_ and _dataPlaneUrl_ are used or not**
 Verify that `writeKey` and `dataPlaneUrl` used while the SDK initialisation are correct.
