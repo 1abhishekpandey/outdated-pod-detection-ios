@@ -8,13 +8,20 @@ assignees: pallabmaiti
 
 **Describe the bug**
 
-1. A clear and concise description of what the bug is.
+1. A clear and concise description of what the bug is
 2. Share the event payload
 3. Minimal viable example to reproduce the issue
-4. Is the SDK being initialised and/or events being made in a coroutine or thread, other than the main thread?
-5. Is the issue occurring for a particular device model and/or OS version.
+4. Is the SDK being initialised and/or events being made in a coroutine or thread, other than the main thread
+5. Is the issue occurring for a particular device model and/or OS version
 6. Stack trace of the issue
 7. From when the issue started
+
+**To Reproduce**
+Steps to reproduce the behavior:
+
+1. Initialise iOS SDK
+2. Make calls '....'
+3. See error
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
