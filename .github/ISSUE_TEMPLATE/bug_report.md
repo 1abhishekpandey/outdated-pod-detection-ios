@@ -21,7 +21,7 @@ Please provide the following information:
 Steps to reproduce the behaviour:
 
 1. Initialise iOS SDK
-2. Make calls '....'
+2. Make events '....'
 3. See the error
 
 **Screenshots**
