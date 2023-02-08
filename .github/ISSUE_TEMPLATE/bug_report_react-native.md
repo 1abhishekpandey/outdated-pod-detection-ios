@@ -17,7 +17,7 @@ Please provide the following information:
 6. Mention the date when the issue began
 
 **Which platform is the issue occurring on**
-Is the error occurring:
+Is the error occurring on:
 
 - [ ] Android
 - [ ] iOS
