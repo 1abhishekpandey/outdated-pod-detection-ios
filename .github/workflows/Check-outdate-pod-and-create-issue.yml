@@ -1,5 +1,6 @@
 name: Check outdate pod and create issue
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
+# on: [push, workflow_dispatch]
 
 jobs:
   check-outdated-pods:
