@@ -17,7 +17,7 @@ assignees: pallabmaiti
 7. From when the issue started
 
 **Version of the iOS SDK**
-The version of the Rudder-iOS SDK you're using.
+The version of the Rudder-iOS SDK you're using (e.g., iOS SDK v1.0.0).
 
 **(Optional) Mobile device mode integration version**
 
