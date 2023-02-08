@@ -19,7 +19,7 @@ assignees: pallabmaiti
 **Version of the iOS SDK**
 The version of the Rudder-iOS SDK you're using (e.g., iOS SDK v1.0.0).
 
-**(Optional) Mobile device mode integration version**
+**Mobile device mode integration version**
 
 1. Name and version of the mobile device mode destinations (e.g., Amplitude v1.0.0 iOS mobile device mode destinations)
 2. Are you using the native SDK directly and what version of it (e.g., Amplitude native iOS SDK v2.0.0)
