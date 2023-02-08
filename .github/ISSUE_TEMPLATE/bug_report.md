@@ -40,7 +40,7 @@ Provide following info:
 Provide following info:
 
 1. Share the code snippet used to initialise the iOS-SDK
-2. Is the SDK initialisation dependent on something? (e.g., iOS SDK is initialised after Firebase initialisation or it is being initialised in a callback)
+2. Is SDK initialisation dependent on something? (e.g., iOS SDK is initialised after Firebase initialisation or it is being initialised in a callback)
 
 **Have you verified correct _writeKey_ and _dataPlaneUrl_ are used or not**
 Verify that `writeKey` and `dataPlaneUrl` used while the SDK initialisation are correct.
