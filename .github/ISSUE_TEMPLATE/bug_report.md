@@ -22,7 +22,7 @@ Steps to reproduce the behaviour:
 
 1. Initialise iOS SDK
 2. Make calls '....'
-3. See error
+3. See the error
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
