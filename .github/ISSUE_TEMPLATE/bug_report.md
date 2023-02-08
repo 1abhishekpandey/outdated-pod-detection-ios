@@ -43,4 +43,4 @@ Provide following info:
 2. Is the SDK initialisation dependent on something? (e.g., iOS SDK is initialised after Firebase initialisation or it is being initialised in a callback)
 
 **Have you verified correct writeKey and dataPlaneUrl are used or not**
-Verify that `writeKey` and `dataPlaneUrl` used while the SDK initialisation is correct or not.
+Verify that `writeKey` and `dataPlaneUrl` used while the SDK initialisation are correct.
