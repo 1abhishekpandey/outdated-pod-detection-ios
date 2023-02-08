@@ -28,19 +28,19 @@ Steps to reproduce the behaviour:
 If applicable, add screenshots to help explain your problem.
 
 **Version of the _iOS_ SDK**
-The version of the `Rudder iOS` SDK you're using (e.g., iOS SDK v1.0.0).
+Please mention the version of the Rudder iOS SDK you are using (e.g., iOS SDK v1.0.0).
 
 **Mobile device mode integration**
 Please provide the following information:
 
 1. `Name` and `version` of the mobile device mode integration (e.g., RudderAmplitude iOS v1.0.0 mobile device mode integration)
-2. Are you using the native SDK directly and what version of it (e.g., Amplitude native iOS SDK v2.0.0)
+2. Indicate if you are using the native SDK directly and specify its version (e.g., Amplitude native iOS SDK v2.0.0)
 
 **SDK initialisation snippet**
 Please provide the following information:
 
-1. Share the code snippet used to initialise the iOS-SDK
-2. Is SDK initialisation dependent on something? (e.g., iOS SDK is initialised after Firebase initialisation or it is being initialised in a callback)
+1. Share the code snippet used for initializing the iOS SDK
+2. Indicate if the SDK initialization depends on any specific condition or event (e.g., initialization of the iOS SDK after Firebase initialization or initialization in a callback)
 
-**Have you verified correct _writeKey_ and _dataPlaneUrl_ are used or not**
-Verify that correct `writeKey` and `dataPlaneUrl` are used while the SDK initialisation.
+**Check for Correct Usage of _writeKey_ and _dataPlaneUrl_**
+Confirm that the correct `writeKey` and `dataPlaneUrl` are utilized during SDK initialization.
