@@ -32,10 +32,7 @@ If applicable, add screenshots to help explain your problem.
 Please mention the version of the Rudder Java SDK you are using (e.g., Java SDK v1.0.0).
 
 **SDK initialisation snippet**
-Please provide the following information:
-
-1. Share the code snippet used for initializing the Java SDK
-2. Indicate if the SDK initialization depends on any specific condition or event (e.g., initialization of the Java SDK after Firebase initialization or initialization in a callback)
+Share the code snippet used for initializing the Java SDK.
 
 **Check for Correct Usage of _writeKey_ and _dataPlaneUrl_**
 Confirm that the correct `writeKey` and `dataPlaneUrl` are utilized during SDK initialization.
