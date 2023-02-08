@@ -7,7 +7,7 @@ assignees: pallabmaiti
 ---
 
 **Describe the bug**
-Provide following info:
+Provide the following info:
 
 1. A clear and concise description of what the bug is
 2. Share the event payload
@@ -18,7 +18,7 @@ Provide following info:
 7. From when the issue started
 
 **To Reproduce**
-Steps to reproduce the behavior:
+Steps to reproduce the behaviour:
 
 1. Initialise iOS SDK
 2. Make calls '....'
@@ -31,13 +31,13 @@ If applicable, add screenshots to help explain your problem.
 The version of the `Rudder iOS` SDK you're using (e.g., iOS SDK v1.0.0).
 
 **Mobile device mode integration**
-Provide following info:
+Provide the following info:
 
 1. `Name` and `version` of the mobile device mode integration (e.g., RudderAmplitude iOS v1.0.0 mobile device mode integration)
 2. Are you using the native SDK directly and what version of it (e.g., Amplitude native iOS SDK v2.0.0)
 
 **SDK initialisation snippet**
-Provide following info:
+Provide the following info:
 
 1. Share the code snippet used to initialise the iOS-SDK
 2. Is SDK initialisation dependent on something? (e.g., iOS SDK is initialised after Firebase initialisation or it is being initialised in a callback)
