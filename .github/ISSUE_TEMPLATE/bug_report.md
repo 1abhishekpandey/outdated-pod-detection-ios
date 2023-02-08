@@ -26,7 +26,7 @@ The version of the Rudder-iOS SDK you're using (e.g., iOS SDK v1.0.0).
 
 **SDK initialisation snippet**
 
-1. Share the snippet used to initialise the iOS-SDK
+1. Share the code snippet used to initialise the iOS-SDK
 2. Is the SDK initialisation depend on something? (e.g., iOS SDK is initialised after Firebase initialisation or it is being initialised in a callback)
 
 **Have you verified correct writeKey and dataPlaneUrl is used**
