@@ -16,6 +16,9 @@ assignees: pallabmaiti
 6. Stack trace of the issue
 7. From when the issue started
 
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
 **Version of the iOS SDK**
 The version of the Rudder-iOS SDK you're using (e.g., iOS SDK v1.0.0).
 
