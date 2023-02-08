@@ -23,6 +23,9 @@ Is the error occurring on:
 - [ ] iOS
 - [ ] Both Android and iOS
 
+**Expected behavior**
+A clear and concise description of what you expected to happen.
+
 **To Reproduce**
 Steps to reproduce the behaviour:
 
