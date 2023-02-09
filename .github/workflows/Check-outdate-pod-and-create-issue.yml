@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: Check outdated pods and create issue
         id: check-outdated-pods-and-create-issue
-        uses: 1abhishekpandey/pod-outdated-check-and-create-github-issue@main
+        uses: 1abhishekpandey/pod-outdated-check-and-create-github-issue@feat/jsBasedAction
         with:
-          outdated-pod-name: "Amplitude, Rudder"
+          outdated-pod-name: "Amplitude"
           directory: "Example"
           title: "fix: update Amplitude SDK to the latest version"
           # body: "update the sdk"
@@ -22,10 +22,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       # Use the output from the `check-outdated-pods-and-create-issue` step
-      - name: Get the github issue url
-        if: steps.check-outdated-pods-and-create-issue.outputs.issue-url != ''
-        run: echo "The Github issue url is ${{ steps.check-outdated-pods-and-create-issue.outputs.issue-url }}"
+      # - name: Get the github issue url
+      #   if: steps.check-outdated-pods-and-create-issue.outputs.issue-url != ''
+      #   run: echo "The Github issue url is ${{ steps.check-outdated-pods-and-create-issue.outputs.issue-url }}"
 
-      - name: Is outdated pods present
-        if: steps.check-outdated-pods-and-create-issue.outputs.has-outdated-pod == 'true'
-        run: echo "Outdated pod is detected"
+      # - name: Is outdated pods present
+      #   if: steps.check-outdated-pods-and-create-issue.outputs.has-outdated-pod == 'true'
+      #   run: echo "Outdated pod is detected"
