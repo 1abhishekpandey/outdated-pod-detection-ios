@@ -77,4 +77,7 @@
 # done
 
 # ./multiple_outdatedpod.sh "Amplitude, Rudder" "Example" "fix: update Amplitude SDK to the latest version 6" "1abhishekpandey" "Update the pods" "outdatedPods" "FBCA04"
-./multiple_outdatedpod.sh "Amplitude, Rudder" "Example" "fix: update Amplitude SDK to the latest version 6" "1abhishekpandey" "" "outdatedPods" "FBCA04"
+# ./multiple_outdatedpod.sh "Amplitude, Rudder" "Example" "fix: update Amplitude SDK to the latest version 6" "1abhishekpandey" "" "outdatedPods" "FBCA04"
+
+# No labels
+./multiple_outdatedpod.sh "Amplitude, Rudder" "Example" "fix: update Amplitude SDK to the latest version 6" "1abhishekpandey" "" "" "FBCA04"

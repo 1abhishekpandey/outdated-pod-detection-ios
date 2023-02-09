@@ -62,8 +62,10 @@ create_new_issue() {
     echo "Creating new issue"
 
     # Create a label
-    $(gh label create --force "$LABELS" --description "Pod is outdated" --color "$COLOR")
+    if [ -n "$labels" ]; then
 
+        $(gh label create --force "$LABELS" --description "Pod is outdated" --color "$COLOR")
+    fi
     # Create a new issue
     issue_url=$(gh issue create -a "$ASSIGNEE" -b "$BODY" -t "$TITLE" --label "$LABELS")
 }
