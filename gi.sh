@@ -1,6 +1,6 @@
-
+#!/bin/bash
 # a="$(gh issue list --search 'fix: update SDK to the latest version' --json title | jq '.[]')"
-# echo $a 
+# echo $a
 # echo $a | jq '.title' | tr -d '"'
 # echo $a | jq '.number'
 # b="$($a | jq '.title')"
@@ -16,14 +16,11 @@
 # done
 # echo $n
 
-n="$(gh issue list --search 'fix: update SDK to the latest version' | grep 'fix:' | awk '{print $1}' )"
-# words=( $n )
-# printf "%s\n" "${words[0]}" ## print array
-echo $n
+# n="$(gh issue list --search 'fix: update SDK to the latest version' | grep 'fix:' | awk '{print $1}' )"
+# echo $n
 
 # q="$(gh issue view $n --json title | jq '.[]')"
 # echo $q
-
 
 # MYPATH=$n
 # echo $MYPATH
@@ -33,3 +30,22 @@ echo $n
 # echo $n | awk '{print $1}'
 # echo $p
 # echo $p |  jq '.'
+
+trim_whitespaces() {
+    local string="$1"
+    string="${string#"${string%%[![:space:]]*}"}"
+    string="${string%"${string##*[![:space:]]}"}"
+    # echo "$string"
+}
+
+issue_titles=$(gh issue list --search "fix:" --json title | jq '.[]' | jq -r '.[]') #.title')
+# echo "issue_titles= $issue_titles \n\n"
+
+for value in "${issue_titles[@]}"; do
+    INDIVIDUAL_POD=$(trim_whitespaces "$value")
+    echo "$INDIVIDUAL_POD\n"
+    if [ "$INDIVIDUAL_POD" == "fix:" ]; then
+        echo "Strings are equal."
+    fi
+    echo "$INDIVIDUAL_POD...."
+done
