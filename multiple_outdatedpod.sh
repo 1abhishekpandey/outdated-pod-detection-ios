@@ -1,0 +1,143 @@
+#!/bin/bash
+
+# Mandatory Input
+MULTIPLE_PODS_INPUT=$1
+INPUT_DIRECTORY=$2
+
+# Optional Input
+TITLE=$3
+ASSIGNEE=$4
+BODY=$5
+LABELS=$6
+COLOR=$7
+
+if [ -z "$MULTIPLE_PODS_INPUT" ] || [ -z "$INPUT_DIRECTORY" ]; then
+    echo "Mandatory fields must be present."
+    exit 1
+else
+    echo "Input Pods is: $MULTIPLE_PODS_INPUT"
+    echo "Input Directory is: $INPUT_DIRECTORY"
+fi
+
+echo "Title is: $TITLE"
+echo "Assignee is: $ASSIGNEE"
+echo "Body is: $BODY"
+echo "Labels is: $LABELS"
+echo "Color is: $COLOR"
+
+echo "Change to directory: $INPUT_DIRECTORY"
+cd "$INPUT_DIRECTORY"
+
+pod install
+
+# Function to trim whitespaces from a string
+trim_whitespaces() {
+    local string="$1"
+    string="${string#"${string%%[![:space:]]*}"}"
+    string="${string%"${string##*[![:space:]]}"}"
+    echo "$string"
+}
+
+edit_issues() {
+    local issues="$1"
+    local title="$2"
+    local body="$3"
+
+    while read item; do
+        i_title=$(jq -r '.title' <<<"$item")
+        i_number=$(jq -r '.number' <<<"$item")
+
+        if [ "$i_title" == "$title" ]; then
+            echo "Edit existing issue"
+            # echo "i_title is: "$i_title""
+            # echo "title is: "$title""
+            gh issue edit "$i_number" --body "$body"
+            issue_url=$(gh issue view "$i_number" --json url | jq '.[]')
+            return
+        fi
+    done <<<"$(echo "$issues" | jq -c -r '.[]')"
+}
+
+create_new_issue() {
+    echo "Creating new issue"
+
+    # Create a label
+    $(gh label create --force "$LABELS" --description "Pod is outdated" --color "$COLOR")
+
+    # Create a new issue
+    issue_url=$(gh issue create -a "$ASSIGNEE" -b "$BODY" -t "$TITLE" --label "$LABELS")
+}
+
+# Save the original IFS
+original_ifs=$IFS
+
+# Set IFS to a comma
+IFS=","
+
+# Split the string into an array
+MULTIPLE_PODS=($MULTIPLE_PODS_INPUT)
+
+POD_OUTDATED_OUTPUT=$(pod outdated)
+echo "POD INSTALL output: $POD_OUTDATED_OUTPUT"
+
+if [ -z "$TITLE" ]; then
+    echo "Since title of the issue is not present, issue will not be created. To create the issue at least provide the title."
+    exit 0
+fi
+
+# Initialize an empty body
+body=()
+
+has_outdated_pod="NO"
+
+# Iterate pods
+for value in "${MULTIPLE_PODS[@]}"; do
+    INDIVIDUAL_POD=$(trim_whitespaces "$value")
+    echo "Currently checking for pod: $INDIVIDUAL_POD"
+
+    CURRENT_VERSION=$(echo "$POD_OUTDATED_OUTPUT" | grep -i "$INDIVIDUAL_POD" | cut -d ">" -f2 | cut -d "(" -f1 | sed 's/ //g')
+    LATEST_VERSION=$(echo "$POD_OUTDATED_OUTPUT" | grep -i "$INDIVIDUAL_POD" | cut -d "(" -f2 | cut -d ")" -f1)
+
+    # Outdated POD is detected, update the body
+    if [ -n "$CURRENT_VERSION" ]; then
+        has_outdated_pod="YES"
+        echo "$INDIVIDUAL_POD POD need an update."
+
+        GENERATED_BODY="Update the $INDIVIDUAL_POD SDK from the current version $CURRENT_VERSION to the $LATEST_VERSION."
+        body+=("$GENERATED_BODY")
+    fi
+done
+
+# Create a sinle body delimited with newlines
+body=$(
+    IFS=$'\n'
+    echo "${body[*]}"
+)
+
+# If BODY input is not provided
+if [ -z "$BODY" ]; then
+    BODY="$body"
+fi
+
+# Create or edit existing issue
+if [ "$has_outdated_pod" == "YES" ]; then
+
+    # Construct json array containing title and number
+    issues=$(gh issue list --search "$TITLE" --json title,number)
+
+    # Edit the issue and get the issue url
+    edit_issues "$issues" "$TITLE" "$BODY"
+    # If issue url is already present
+    if [ -n "$issue_url" ]; then
+        echo "Issue exist and its URL is: $issue_url"
+        export issue_url has_outdated_pod=="true"
+    else
+        # Issue doesn't exist!
+        create_new_issue
+        echo "New issue is created and its URL is: $issue_url"
+        export issue_url has_outdated_pod="YES"
+    fi
+else
+    echo "No Outdted PODs detected"
+    export "" has_outdated_pod="YES"
+fi
