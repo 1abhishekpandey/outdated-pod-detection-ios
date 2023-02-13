@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '12.0'
 
   s.source_files = 'Rudder-Amplitude/Classes/**/*'
-  s.dependency 'Rudder', '2.2.6'
+  s.dependency 'Rudder', '1.8.0'
   s.dependency 'Amplitude', '~> 7.2.0'
 end

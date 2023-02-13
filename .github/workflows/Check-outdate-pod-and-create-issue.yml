@@ -16,9 +16,9 @@ jobs:
           directory: "Example"
           title: "fix: update Amplitude SDK to the latest version"
           # body: "update the sdk"
-          # assignee: "1abhishekpandey"
-          # labels: "outdatedPod"
-          # color: "FBCA04"
+          assignee: "1abhishekpandey"
+          labels: "outdatedPod"
+          color: "FBCA04"
         env:
           GH_TOKEN: ${{ github.token }}
 
