@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Check outdated pods and create issue
         id: check-outdated-pods-and-create-issue
-        uses: 1abhishekpandey/pod-outdated-check-and-create-github-issue@v2.0.1
+        uses: 1abhishekpandey/pod-outdated-check-and-create-github-issue@main
         with:
           outdated-pod-name: "Rudder, Amplitude"
           directory: "Example"
@@ -27,6 +27,10 @@ jobs:
         if: steps.check-outdated-pods-and-create-issue.outputs.issue-url != ''
         run: echo "The Github issue url is ${{ steps.check-outdated-pods-and-create-issue.outputs.issue-url }}"
 
-      - name: Is outdated pods present
+      - name: Outdated pod is detected
         if: steps.check-outdated-pods-and-create-issue.outputs.has-outdated-pod == 'true'
         run: echo "Outdated pod is detected"
+
+      - name: Outdated pod is not detected
+        if: steps.check-outdated-pods-and-create-issue.outputs.has-outdated-pod == 'false'
+        run: echo "Outdated pod is not detected"

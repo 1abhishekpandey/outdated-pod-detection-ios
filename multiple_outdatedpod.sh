@@ -28,7 +28,10 @@ echo "Color is: $COLOR"
 echo "Change to directory: $INPUT_DIRECTORY"
 cd "$INPUT_DIRECTORY"
 
-rm Podfile.lock
+# Remove the existing Podfile.lock and then install the pods
+if [ -f Podfile.lock ]; then
+    rm Podfile.lock
+fi
 pod install
 
 # Function to trim whitespaces from a string
@@ -81,15 +84,10 @@ MULTIPLE_PODS=($MULTIPLE_PODS_INPUT)
 POD_OUTDATED_OUTPUT=$(pod outdated)
 echo "POD INSTALL output: $POD_OUTDATED_OUTPUT"
 
-if [ -z "$TITLE" ]; then
-    echo "Since title of the issue is not present, issue will not be created. To create the issue at least provide the title."
-    exit 0
-fi
-
 # Initialize an empty body
 body=()
 
-has_outdated_pod="NO"
+HAS_OUTDATED_PODS="false"
 
 # Check if outdated PODs are present or not and accordingly construct the description of the issue
 for value in "${MULTIPLE_PODS[@]}"; do
@@ -101,7 +99,7 @@ for value in "${MULTIPLE_PODS[@]}"; do
 
     # Outdated POD is detected, update the body
     if [ -n "$CURRENT_VERSION" ]; then
-        has_outdated_pod="YES"
+        HAS_OUTDATED_PODS="true"
         echo "$INDIVIDUAL_POD POD need an update."
 
         GENERATED_BODY="Update the $INDIVIDUAL_POD SDK from the current version $CURRENT_VERSION to the $LATEST_VERSION."
@@ -109,36 +107,42 @@ for value in "${MULTIPLE_PODS[@]}"; do
     fi
 done
 
-# Create a sinle body delimited with newlines
-body=$(
-    IFS=$'\n'
-    echo "${body[*]}"
-)
-
-# If BODY input is not provided
-if [ -z "$BODY" ]; then
-    BODY="$body"
-fi
-
-# Create or edit existing issue
-if [ "$has_outdated_pod" == "YES" ]; then
-
-    # Construct json array containing title and number
-    issues=$(gh issue list --search "$TITLE" --json title,number)
-
-    # Edit the issue and get the issue url
-    edit_issues "$issues" "$TITLE" "$BODY"
-    # If issue url is already present
-    if [ -n "$ISSUE_URL" ]; then
-        echo "Issue exist and its URL is: $ISSUE_URL"
-        export ISSUE_URL HAS_OUTDATED_PODS="true"
-    else
-        # Issue doesn't exist!
-        create_new_issue
-        echo "New issue is created and its URL is: $ISSUE_URL"
-        export ISSUE_URL HAS_OUTDATED_PODS="YES"
-    fi
+if [ -z "$TITLE" ]; then
+    echo "Since title of the issue is not present, issue will not be created. To create the issue at least provide the title."
+    export ISSUE_URL="" HAS_OUTDATED_PODS
 else
-    echo "No Outdted PODs detected"
-    export ISSUE_URL="" HAS_OUTDATED_PODS="YES"
+
+    # Create a sinle body delimited with newlines
+    body=$(
+        IFS=$'\n'
+        echo "${body[*]}"
+    )
+
+    # If BODY input is not provided
+    if [ -z "$BODY" ]; then
+        BODY="$body"
+    fi
+
+    # Create or edit existing issue
+    if [ "$HAS_OUTDATED_PODS" == "true" ]; then
+
+        # Construct json array containing title and number
+        issues=$(gh issue list --search "$TITLE" --json title,number)
+
+        # Edit the issue and get the issue url
+        edit_issues "$issues" "$TITLE" "$BODY"
+        # If issue url already exists
+        if [ -n "$ISSUE_URL" ]; then
+            echo "Issue exist and its URL is: $ISSUE_URL"
+            export ISSUE_URL HAS_OUTDATED_PODS
+        else
+            # Issue doesn't exist!
+            create_new_issue
+            echo "New issue is created and its URL is: $ISSUE_URL"
+            export ISSUE_URL HAS_OUTDATED_PODS
+        fi
+    else
+        echo "No Outdated PODs detected"
+        export ISSUE_URL="" HAS_OUTDATED_PODS
+    fi
 fi
