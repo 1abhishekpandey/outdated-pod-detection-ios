@@ -28,6 +28,7 @@ echo "Color is: $COLOR"
 echo "Change to directory: $INPUT_DIRECTORY"
 cd "$INPUT_DIRECTORY"
 
+rm Podfile.lock
 pod install
 
 # Function to trim whitespaces from a string
