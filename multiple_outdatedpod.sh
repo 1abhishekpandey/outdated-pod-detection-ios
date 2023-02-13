@@ -49,10 +49,8 @@ edit_issues() {
 
         if [ "$i_title" == "$title" ]; then
             echo "Edit existing issue"
-            # echo "i_title is: "$i_title""
-            # echo "title is: "$title""
             gh issue edit "$i_number" --body "$body"
-            issue_url=$(gh issue view "$i_number" --json url | jq '.[]')
+            ISSUE_URL=$(gh issue view "$i_number" --json url | jq '.[]')
             return
         fi
     done <<<"$(echo "$issues" | jq -c -r '.[]')"
@@ -67,7 +65,7 @@ create_new_issue() {
         $(gh label create --force "$LABELS" --description "Pod is outdated" --color "$COLOR")
     fi
     # Create a new issue
-    issue_url=$(gh issue create -a "$ASSIGNEE" -b "$BODY" -t "$TITLE" --label "$LABELS")
+    ISSUE_URL=$(gh issue create -a "$ASSIGNEE" -b "$BODY" -t "$TITLE" --label "$LABELS")
 }
 
 # Save the original IFS
@@ -92,7 +90,7 @@ body=()
 
 has_outdated_pod="NO"
 
-# Iterate pods
+# Check if outdated PODs are present or not and accordingly construct the description of the issue
 for value in "${MULTIPLE_PODS[@]}"; do
     INDIVIDUAL_POD=$(trim_whitespaces "$value")
     echo "Currently checking for pod: $INDIVIDUAL_POD"
@@ -130,16 +128,16 @@ if [ "$has_outdated_pod" == "YES" ]; then
     # Edit the issue and get the issue url
     edit_issues "$issues" "$TITLE" "$BODY"
     # If issue url is already present
-    if [ -n "$issue_url" ]; then
-        echo "Issue exist and its URL is: $issue_url"
-        export issue_url has_outdated_pod=="true"
+    if [ -n "$ISSUE_URL" ]; then
+        echo "Issue exist and its URL is: $ISSUE_URL"
+        export ISSUE_URL HAS_OUTDATED_PODS="true"
     else
         # Issue doesn't exist!
         create_new_issue
-        echo "New issue is created and its URL is: $issue_url"
-        export issue_url has_outdated_pod="YES"
+        echo "New issue is created and its URL is: $ISSUE_URL"
+        export ISSUE_URL HAS_OUTDATED_PODS="YES"
     fi
 else
     echo "No Outdted PODs detected"
-    export "" has_outdated_pod="YES"
+    export ISSUE_URL="" HAS_OUTDATED_PODS="YES"
 fi
