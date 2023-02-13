@@ -24,9 +24,9 @@ jobs:
 
       # Use the output from the `check-outdated-pods-and-create-issue` step
       - name: Get the github issue url
-        if: steps.check-outdated-pods-and-create-issue.outputs.issue-url != ''
+        if: steps.check-outdated-pods-and-create-issue.outputs.ISSUE_URL != ''
         run: echo "The Github issue url is ${{ steps.check-outdated-pods-and-create-issue.outputs.issue-url }}"
 
       - name: Is outdated pods present
-        if: steps.check-outdated-pods-and-create-issue.outputs.has-outdated-pod == 'true'
+        if: steps.check-outdated-pods-and-create-issue.outputs.HAS_OUTDATED_PODS == 'true'
         run: echo "Outdated pod is detected"
