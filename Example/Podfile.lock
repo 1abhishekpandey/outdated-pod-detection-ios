@@ -1,7 +1,5 @@
 PODS:
-  - Amplitude (8.14.1):
-    - AnalyticsConnector (~> 1.0.0)
-  - AnalyticsConnector (1.0.1)
+  - Amplitude (7.2.2)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
@@ -9,7 +7,7 @@ PODS:
     - FBSnapshotTestCase/Core
   - Rudder (1.8.0)
   - Rudder-Amplitude (1.0.2):
-    - Amplitude (~> 8.14.0)
+    - Amplitude (~> 7.2.0)
     - Rudder (= 1.8.0)
 
 DEPENDENCIES:
@@ -19,7 +17,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Amplitude
-    - AnalyticsConnector
     - FBSnapshotTestCase
     - Rudder
 
@@ -28,12 +25,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Amplitude: 1d13b996a61a4199b6c717c3a0a1452e46caa064
-  AnalyticsConnector: eccd7e1cd3dd18e6bd09ac2506e37d4ed43ba3f4
+  Amplitude: 517cdc7c485bda64b685174426ecbf17746eb16a
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   Rudder: 0a5272646aa3b89295526cea2bf54d092044848a
-  Rudder-Amplitude: 18f57a4ffe0ff90e96151b6a4d74e273e2871b66
+  Rudder-Amplitude: c434a09089afa0b960663e98899a7d1b85d2df9a
 
-PODFILE CHECKSUM: f39ba5417b183437301e323f07d248fe8194ffff
+PODFILE CHECKSUM: 0ddf15a645f7d4bb8e3e0a23ae94a867364f0246
 
 COCOAPODS: 1.11.3
