@@ -23,10 +23,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       # Use the output from the `check-outdated-pods-and-create-issue` step
-      # - name: Get the github issue url
-      #   if: steps.check-outdated-pods-and-create-issue.outputs.issue-url != ''
-      #   run: echo "The Github issue url is ${{ steps.check-outdated-pods-and-create-issue.outputs.issue-url }}"
+      - name: Get the github issue url
+        if: steps.check-outdated-pods-and-create-issue.outputs.issue-url != ''
+        run: echo "The Github issue url is ${{ steps.check-outdated-pods-and-create-issue.outputs.issue-url }}"
 
-      # - name: Is outdated pods present
-      #   if: steps.check-outdated-pods-and-create-issue.outputs.has-outdated-pod == 'true'
-      #   run: echo "Outdated pod is detected"
+      - name: Is outdated pods present
+        if: steps.check-outdated-pods-and-create-issue.outputs.has-outdated-pod == 'true'
+        run: echo "Outdated pod is detected"
