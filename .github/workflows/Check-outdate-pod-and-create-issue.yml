@@ -14,7 +14,7 @@ jobs:
         with:
           outdated-pod-name: "Rudder, Amplitude"
           directory: "Example"
-          # title: "fix: update Amplitude SDK to the latest version"
+          title: "fix: update Amplitude SDK to the latest version"
           # body: "update the sdk"
           # assignee: "1abhishekpandey"
           # labels: "outdatedPod"
