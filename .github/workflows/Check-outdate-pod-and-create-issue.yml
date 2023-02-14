@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Check outdated pods and create issue
         id: check-outdated-pods-and-create-issue
-        uses: 1abhishekpandey/manage-github-issue-for-outdated-pods
+        uses: 1abhishekpandey/manage-github-issue-for-outdated-pods@main
         with:
           outdated-pod-names: "Rudder, Amplitude"
           directory: "Example"
