@@ -13,7 +13,7 @@ jobs:
         # uses: 1abhishekpandey/manage-github-issue-for-outdated-pods@main
         uses: rudderlabs/github-action-updated-pods-notifier/@feat/addDeprecatedPodDetectionSupport
         with:
-          outdated-pod-names: "Rudder, Amplitude"
+          outdated-pod-names: "Rudder, Amplitude, KochavaTrackeriOS, KochavaAdNetworkiOS"
           directory: "Example"
           title: "fix: update Amplitude SDK to the latest version"
           # body: "update the sdk"

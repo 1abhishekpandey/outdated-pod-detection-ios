@@ -23,4 +23,6 @@ Pod::Spec.new do |s|
   s.dependency 'Rudder', '1.8.0'
   s.dependency 'Amplitude', '~> 7.2.0'
   s.dependency 'Branch'
+  s.dependency 'KochavaTrackeriOS', '5.1.0'
+  s.dependency 'KochavaAdNetworkiOS', '5.1.0'
 end
