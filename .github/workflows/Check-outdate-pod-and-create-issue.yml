@@ -11,7 +11,7 @@ jobs:
       - name: Check outdated pods and create issue
         id: check-outdated-pods-and-create-issue
         # uses: 1abhishekpandey/manage-github-issue-for-outdated-pods@main
-        uses: rudderlabs/github-action-updated-pods-notifier/@feat/addDeprecatedPodDetectionSupport
+        uses: rudderlabs/github-action-updated-pods-notifier/@main
         with:
           outdated-pod-names: "Rudder, Amplitude, KochavaTrackeriOS, KochavaAdNetworkiOS"
           directory: "Example"
