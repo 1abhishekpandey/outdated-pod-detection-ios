@@ -22,6 +22,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Rudder-Amplitude/Classes/**/*'
   s.dependency 'Rudder', '1.8.0'
   s.dependency 'Amplitude', '~> 7.2.0'
-  s.ios.dependency 'AdobeMobileSDK'
   s.dependency 'AdobeVideoHeartbeatSDK'
 end
