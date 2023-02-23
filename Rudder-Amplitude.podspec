@@ -28,4 +28,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
   s.dependency 'KochavaTrackeriOS', '5.1.0'
   s.dependency 'KochavaAdNetworkiOS', '5.1.0'
+
+  s.ios.dependency 'AdobeMobileSDK'
+  s.dependency 'AdobeVideoHeartbeatSDK'
 end
