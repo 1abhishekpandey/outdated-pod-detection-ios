@@ -31,4 +31,7 @@ Pod::Spec.new do |s|
 
   s.ios.dependency 'AdobeMobileSDK'
   s.dependency 'AdobeVideoHeartbeatSDK'
+
+  s.dependency 'Singular-SDK', '11.0.4'
+  s.dependency 'FBSDKCoreKit', '~> 13.2.0'
 end
