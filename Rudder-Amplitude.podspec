@@ -20,18 +20,18 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '12.0'
 
   s.source_files = 'Rudder-Amplitude/Classes/**/*'
-  s.dependency 'Rudder', '1.8.0'
-  s.dependency 'Amplitude', '~> 7.2.0'
+  # s.dependency 'Rudder', '1.8.0'
+  # s.dependency 'Amplitude', '~> 7.2.0'
   
-  s.dependency 'Branch'
+  # s.dependency 'Branch'
 
   s.static_framework = true
-  s.dependency 'KochavaTrackeriOS', '5.1.0'
-  s.dependency 'KochavaAdNetworkiOS', '5.1.0'
+  # s.dependency 'KochavaTrackeriOS', '5.1.0'
+  # s.dependency 'KochavaAdNetworkiOS', '5.1.0'
 
-  s.ios.dependency 'AdobeMobileSDK'
-  s.dependency 'AdobeVideoHeartbeatSDK'
+  # s.ios.dependency 'AdobeMobileSDK'
+  # s.dependency 'AdobeVideoHeartbeatSDK'
 
-  s.dependency 'Singular-SDK', '11.0.4'
+  # s.dependency 'Singular-SDK', '11.0.4'
   s.dependency 'FBSDKCoreKit', '~> 13.2.0'
 end

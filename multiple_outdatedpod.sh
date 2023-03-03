@@ -97,6 +97,8 @@ for value in "${MULTIPLE_PODS[@]}"; do
     CURRENT_VERSION=$(echo "$POD_OUTDATED_OUTPUT" | grep -i "$INDIVIDUAL_POD" | cut -d ">" -f2 | cut -d "(" -f1 | sed 's/ //g')
     LATEST_VERSION=$(echo "$POD_OUTDATED_OUTPUT" | grep -i "$INDIVIDUAL_POD" | cut -d "(" -f2 | cut -d ")" -f1)
 
+    echo "\nCurrent version: $CURRENT_VERSION"
+    echo "Latest version: $LATEST_VERSION"
     # Outdated POD is detected, update the body
     if [ -n "$CURRENT_VERSION" ]; then
         HAS_OUTDATED_PODS="true"
